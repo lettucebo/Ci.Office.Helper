@@ -13,8 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installtion", "Installtion"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LiberOffice", "LiberOffice", "{F584B400-010A-409E-9414-B61FA9817563}"
 	ProjectSection(SolutionItems) = preProject
-		Installtion\LiberOffice\LibreOffice_5.1.0_Win_x86.msi = Installtion\LiberOffice\LibreOffice_5.1.0_Win_x86.msi
-		Installtion\LiberOffice\LibreOffice_5.1.0_Win_x86_sdk.msi = Installtion\LiberOffice\LibreOffice_5.1.0_Win_x86_sdk.msi
+		Installtion\LiberOffice\LibreOffice_5.1.0_Win_x86.msi.txt = Installtion\LiberOffice\LibreOffice_5.1.0_Win_x86.msi.txt
+		Installtion\LiberOffice\LibreOffice_5.1.0_Win_x86_sdk.txt = Installtion\LiberOffice\LibreOffice_5.1.0_Win_x86_sdk.txt
 	EndProjectSection
 EndProject
 Global
