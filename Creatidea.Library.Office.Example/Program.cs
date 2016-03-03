@@ -35,7 +35,7 @@ namespace Creatidea.Library.Office.Example
         private static void DemoLibreOffice(string docPath, string docxPath)
         {
             Console.WriteLine("========================================");
-            Console.WriteLine("示範LibreOffice");
+            Console.WriteLine("示範 LibreOffice");
 
             Console.WriteLine();
             Console.WriteLine("doc 轉為 pdf：");
@@ -64,6 +64,12 @@ namespace Creatidea.Library.Office.Example
             }
         }
 
+        /// <summary>
+        /// Saves the file.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <param name="fileName">Name of the file.</param>
+        /// <returns>System.String.</returns>
         private static string SaveFile(string path, string fileName)
         {
             string appDirectory = Directory.GetCurrentDirectory();

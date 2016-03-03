@@ -38,7 +38,32 @@ Add the following namespaces to use the library:
 using Creatidea.Library.Office;
 ```
 
+## 環境設定
+至 `CiLiberOffice.json` 設定 SDK 路徑(BinPath)
+```json
+{
+    "CiLibreOffice": {
+        "Version": "1.0.0",
+        "BinPath": "C:\\Program Files (x86)\\LibreOffice 5\\program\\soffice.exe"
+    }
+}
+```
+
 ## 開始開發
+
+直接呼叫 **LibreOffice.OfficeConverter.WordToPdf(filePath)** 傳入 Word 完整檔案路徑即可
+```csharp
+var docResult = LibreOffice.OfficeConverter.WordToPdf(docPath);
+if (!docResult.Success)
+{
+    Console.WriteLine("發生錯誤：{0}", docResult.Message);
+}
+else
+{
+    var link = SaveFile(docResult.Data, "doc.pdf");
+    Console.WriteLine("Show docResult: {0}", link);
+}
+```
 
 ## 備註
 
