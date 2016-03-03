@@ -32,6 +32,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Creatidea.Library.Configs, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Creatidea.Library.Configs.1.0.4\lib\Creatidea.Library.Configs.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Creatidea.Library.Results, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Creatidea.Library.Results.1.0.0\lib\Creatidea.Library.Results.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,10 +56,33 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="App_Data\CiConfig\CiConfig.json" />
+    <None Include="App_Data\CiConfig\CiLiberOffice.json" />
+    <None Include="Demo\Word\Demo.doc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Demo\Word\Demo.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
     <None Include="ReadMe\LibreOfficeManuel.md" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Creatidea.Library.Office.LibreOffice\Creatidea.Library.Office.LibreOffice.csproj">
+      <Project>{a9906155-588e-49c8-9411-ca41fa3cc738}</Project>
+      <Name>Creatidea.Library.Office.LibreOffice</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Creatidea.Library.Office.MicrosoftOffice\Creatidea.Library.Office.MicrosoftOffice.csproj">
+      <Project>{7da5f16e-fc8a-4c56-b25f-3decfcd34f1d}</Project>
+      <Name>Creatidea.Library.Office.MicrosoftOffice</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Creatidea.Library.Office.OpenOffice\Creatidea.Library.Office.OpenOffice.csproj">
+      <Project>{37302e38-106f-454b-a54b-10753de65fca}</Project>
+      <Name>Creatidea.Library.Office.OpenOffice</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

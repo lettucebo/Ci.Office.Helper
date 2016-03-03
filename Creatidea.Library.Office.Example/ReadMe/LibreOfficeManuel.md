@@ -5,6 +5,7 @@
 - SDK安裝說明
 - 安裝 nuget 套件
 - 開始開發
+- 備註
 - Libre Office SDK 起源
 
 ## SDK安裝說明
@@ -38,6 +39,16 @@ using Creatidea.Library.Office;
 ```
 
 ## 開始開發
+
+## 備註
+
+1. 佈署在 IIS 上需注意 LibreOffice 安路路徑權限
+2. 有些 LibreOffice 沒有的功能轉換過去會無法使用(畫布)
+3. 確定 IIS 有執行過該程式
+
+## 參考資料
+
+- [Framework/Article/Filter/FilterList OOo 2 1](<https://wiki.openoffice.org/wiki/Framework/Article/Filter/FilterList_OOo_2_1>)
 
 ## Libre Office SDK 起源
 

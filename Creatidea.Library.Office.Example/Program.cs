@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace Creatidea.Library.Office.Example
 {
+    using System.IO;
+
     /// <summary>
     /// 範例程式
     /// </summary>
@@ -17,15 +19,63 @@ namespace Creatidea.Library.Office.Example
         /// <param name="args">The arguments.</param>
         public static void Main(string[] args)
         {
-            DemoLibreOffice();
+            string appDirectory = Directory.GetCurrentDirectory();
+            string docPath = Path.Combine(appDirectory, "Demo\\Word", "Demo.doc");
+            string docxPath = Path.Combine(appDirectory, "Demo\\Word", "Demo.docx");
+
+            DemoLibreOffice(docPath, docxPath);
         }
 
         /// <summary>
         /// Demoes the libre office.
         /// </summary>
-        private static void DemoLibreOffice()
+        /// <param name="docPath">The document path.</param>
+        /// <param name="docxPath">The docx path.</param>
+        [STAThread]
+        private static void DemoLibreOffice(string docPath, string docxPath)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("========================================");
+            Console.WriteLine("示範LibreOffice");
+
+            Console.WriteLine();
+            Console.WriteLine("doc 轉為 pdf：");
+            var docResult = LibreOffice.OfficeConverter.WordToPdf(docPath);
+            if (!docResult.Success)
+            {
+                Console.WriteLine("發生錯誤：{0}", docResult.Message);
+            }
+            else
+            {
+                var link = SaveFile(docResult.Data, "doc.pdf");
+                Console.WriteLine("Show docResult: {0}", link);
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("docx 轉為 pdf：");
+            var docxResult = LibreOffice.OfficeConverter.WordToPdf(docxPath);
+            if (!docxResult.Success)
+            {
+                Console.WriteLine("發生錯誤：{0}", docxResult.Message);
+            }
+            else
+            {
+                var link = SaveFile(docxResult.Data, "docx.pdf");
+                Console.WriteLine("Show docxResult: {0}", link);
+            }
+        }
+
+        private static string SaveFile(string path, string fileName)
+        {
+            string appDirectory = Directory.GetCurrentDirectory();
+            string docPath = Path.Combine(appDirectory, "Temp", fileName);
+
+            FileInfo file = new FileInfo(docPath);
+            // If the directory already exists, this method does nothing.
+            file.Directory.Create();
+
+            File.Copy(path, docPath, true);
+
+            return fileName;
         }
     }
 }

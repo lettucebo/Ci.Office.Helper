@@ -32,13 +32,18 @@
             string outputFileName = string.Empty;
             string outputPath = string.Empty;
 
+            if (File.Exists(inputFilePath))
+            {
+                outputFileName = Path.GetFileNameWithoutExtension(inputFilePath);
+            }
+            else
+            {
+                result.Message += string.Format("找不到檔案：{0}！，應為*.doc, *.docx", inputFilePath);
+                return result;
+            }
+
             try
             {
-                if (File.Exists(inputFilePath))
-                {
-                    outputFileName = Path.GetFileNameWithoutExtension(inputFilePath);
-                }
-
                 ProcessStartInfo startInfo = new ProcessStartInfo();
                 startInfo.CreateNoWindow = false;
                 startInfo.UseShellExecute = false;
