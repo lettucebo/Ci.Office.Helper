@@ -1,22 +1,21 @@
-﻿namespace Creatidea.Library.Office.LibreOffice
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Creatidea.Library.Office.MicrosoftOffice
 {
-    using System;
     using System.Diagnostics;
     using System.IO;
 
-    using Creatidea.Library.Configs;
     using Creatidea.Library.Results;
 
     /// <summary>
-    /// LibreOffice 轉檔器
+    /// Microsoft Office OfficeConverter.
     /// </summary>
     public class OfficeConverter
     {
-        /// <summary>
-        /// Words to PDF.
-        /// </summary>
-        /// <param name="inputFilePath">The input.</param>
-        /// <returns><see cref="CiResult{T}"/> Data為轉檔後之PDF路徑</returns>
         [STAThread]
         public static CiResult<string> WordToPdf(string inputFilePath)
         {
@@ -45,22 +44,13 @@
 
             try
             {
-                ProcessStartInfo startInfo = new ProcessStartInfo();
-                startInfo.CreateNoWindow = false;
-                startInfo.UseShellExecute = false;
-
-                // 設定執行檔路徑
-                startInfo.FileName = CiConfig.Global.CiLibreOffice.BinPath;
-                startInfo.WorkingDirectory = outputDir;
-                startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                startInfo.Arguments = string.Format(" -headless -convert-to pdf {0}", inputFilePath);
-
-                using (Process exeProcess = Process.Start(startInfo))
-                {
-                    exeProcess.WaitForExit();
-                }
+                var wordApp = new Microsoft.Office.Interop.Word.Application();
+                Microsoft.Office.Interop.Word.Document doc = wordApp.Documents.Open(inputFilePath);
 
                 outputPath = Path.Combine(outputDir, outputFileName + ".pdf");
+                doc.SaveAs(outputPath, Microsoft.Office.Interop.Word.WdSaveFormat.wdFormatPDF);
+                wordApp.Visible = false;
+                wordApp.Quit();
             }
             catch (Exception ex)
             {

@@ -23,13 +23,52 @@ namespace Creatidea.Library.Office.Example
             string docPath = Path.Combine(appDirectory, "Demo\\Word", "Demo.doc");
             string docxPath = Path.Combine(appDirectory, "Demo\\Word", "Demo.docx");
 
-            DemoLibreOffice(docPath, docxPath);
+            //DemoLibreOffice(docPath, docxPath);
+
+            DemoMicrosoftOffice(docPath, docxPath);
+        }
+
+        /// <summary>
+        /// Demoes the microsoft office.
+        /// </summary>
+        /// <param name="docPath">The doc path.</param>
+        /// <param name="docxPath">The docx path.</param>
+        private static void DemoMicrosoftOffice(string docPath, string docxPath)
+        {
+            Console.WriteLine("========================================");
+            Console.WriteLine("示範 MicrosoftOffice");
+
+            Console.WriteLine();
+            Console.WriteLine("doc 轉為 pdf：");
+            var docResult = MicrosoftOffice.OfficeConverter.WordToPdf(docPath);
+            if (!docResult.Success)
+            {
+                Console.WriteLine("發生錯誤：{0}", docResult.Message);
+            }
+            else
+            {
+                var link = SaveFile(docResult.Data, "msdoc.pdf");
+                Console.WriteLine("Show docResult: {0}", link);
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("docx 轉為 pdf：");
+            var docxResult = MicrosoftOffice.OfficeConverter.WordToPdf(docxPath);
+            if (!docxResult.Success)
+            {
+                Console.WriteLine("發生錯誤：{0}", docxResult.Message);
+            }
+            else
+            {
+                var link = SaveFile(docxResult.Data, "msdocx.pdf");
+                Console.WriteLine("Show docxResult: {0}", link);
+            }
         }
 
         /// <summary>
         /// Demoes the libre office.
         /// </summary>
-        /// <param name="docPath">The document path.</param>
+        /// <param name="docPath">The doc path.</param>
         /// <param name="docxPath">The docx path.</param>
         [STAThread]
         private static void DemoLibreOffice(string docPath, string docxPath)
@@ -46,7 +85,7 @@ namespace Creatidea.Library.Office.Example
             }
             else
             {
-                var link = SaveFile(docResult.Data, "doc.pdf");
+                var link = SaveFile(docResult.Data, "libredoc.pdf");
                 Console.WriteLine("Show docResult: {0}", link);
             }
 
@@ -59,7 +98,7 @@ namespace Creatidea.Library.Office.Example
             }
             else
             {
-                var link = SaveFile(docxResult.Data, "docx.pdf");
+                var link = SaveFile(docxResult.Data, "libredocx.pdf");
                 Console.WriteLine("Show docxResult: {0}", link);
             }
         }
