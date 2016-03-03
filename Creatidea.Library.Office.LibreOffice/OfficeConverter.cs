@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-namespace Creatidea.Library.Office.LibreOffice
+﻿namespace Creatidea.Library.Office.LibreOffice
 {
+    using System;
     using System.Diagnostics;
     using System.IO;
 
@@ -11,7 +8,7 @@ namespace Creatidea.Library.Office.LibreOffice
     using Creatidea.Library.Results;
 
     /// <summary>
-    /// LibraOffice 轉檔器
+    /// LibreOffice 轉檔器
     /// </summary>
     public class OfficeConverter
     {
@@ -47,7 +44,7 @@ namespace Creatidea.Library.Office.LibreOffice
                 startInfo.UseShellExecute = false;
 
                 // 設定執行檔路徑
-                startInfo.FileName = CiConfig.Global.CiLiberOffice.BinPath;
+                startInfo.FileName = CiConfig.Global.CiLibreOffice.BinPath;
                 startInfo.WorkingDirectory = outputDir;
                 startInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 startInfo.Arguments = string.Format(" -headless -convert-to pdf {0}", inputFilePath);
