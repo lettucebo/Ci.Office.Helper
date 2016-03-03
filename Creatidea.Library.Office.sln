@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Creatidea.Library.Office.LibreOffice", "Creatidea.Library.Office.LibreOffice\Creatidea.Library.Office.LibreOffice.csproj", "{A9906155-588E-49C8-9411-CA41FA3CC738}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Creatidea.Library.Office.MicrosoftOffice", "Creatidea.Library.Office.MicrosoftOffice\Creatidea.Library.Office.MicrosoftOffice.csproj", "{7DA5F16E-FC8A-4C56-B25F-3DECFCD34F1D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Creatidea.Library.Office.MsOffice", "Creatidea.Library.Office.MicrosoftOffice\Creatidea.Library.Office.MsOffice.csproj", "{7DA5F16E-FC8A-4C56-B25F-3DECFCD34F1D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Creatidea.Library.Office.OpenOffice", "Creatidea.Library.Office.OpenOffice\Creatidea.Library.Office.OpenOffice.csproj", "{37302E38-106F-454B-A54B-10753DE65FCA}"
 EndProject

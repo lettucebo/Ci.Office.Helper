@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Creatidea.Library.Office.MicrosoftOffice
+namespace Creatidea.Library.Office.MsOffice
 {
     using System.Diagnostics;
     using System.IO;

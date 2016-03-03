@@ -27,7 +27,7 @@
 You can either <a href="https://github.com/lettucebo/Creatidea.Library.Office.git">download</a> the source and build your own dll or, if you have the NuGet package manager installed, you can grab them automatically.
 
 ```
-PM> Install-Package Creatidea.Library.Office
+PM> Install-Package Creatidea.Library.LibreOffice
 ```
 
 Once you have the libraries properly referenced in your project, you can include calls to them in your code. 
@@ -35,7 +35,7 @@ For a sample implementation, check the [Example](https://github.com/lettucebo/Cr
 
 Add the following namespaces to use the library:
 ```csharp
-using Creatidea.Library.Office;
+using Creatidea.Library.Office.LibreOffice;
 ```
 
 ## 環境設定
@@ -52,6 +52,7 @@ using Creatidea.Library.Office;
 ## 開始開發
 
 直接呼叫 **LibreOffice.OfficeConverter.WordToPdf(filePath)** 傳入 Word 完整檔案路徑即可
+可傳入`*.doc` 或 `*.docx`
 ```csharp
 var docResult = LibreOffice.OfficeConverter.WordToPdf(docPath);
 if (!docResult.Success)

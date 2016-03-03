@@ -23,7 +23,7 @@ namespace Creatidea.Library.Office.Example
             string docPath = Path.Combine(appDirectory, "Demo\\Word", "Demo.doc");
             string docxPath = Path.Combine(appDirectory, "Demo\\Word", "Demo.docx");
 
-            //DemoLibreOffice(docPath, docxPath);
+            DemoLibreOffice(docPath, docxPath);
 
             DemoMicrosoftOffice(docPath, docxPath);
         }
@@ -40,7 +40,7 @@ namespace Creatidea.Library.Office.Example
 
             Console.WriteLine();
             Console.WriteLine("doc 轉為 pdf：");
-            var docResult = MicrosoftOffice.OfficeConverter.WordToPdf(docPath);
+            var docResult = MsOffice.OfficeConverter.WordToPdf(docPath);
             if (!docResult.Success)
             {
                 Console.WriteLine("發生錯誤：{0}", docResult.Message);
@@ -53,7 +53,7 @@ namespace Creatidea.Library.Office.Example
 
             Console.WriteLine();
             Console.WriteLine("docx 轉為 pdf：");
-            var docxResult = MicrosoftOffice.OfficeConverter.WordToPdf(docxPath);
+            var docxResult = MsOffice.OfficeConverter.WordToPdf(docxPath);
             if (!docxResult.Success)
             {
                 Console.WriteLine("發生錯誤：{0}", docxResult.Message);

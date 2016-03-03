@@ -65,8 +65,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
-    <None Include="ReadMe\MicrosoftOfficeManuel.md" />
-    <None Include="ReadMe\LibreOfficeManuel.md" />
+    <None Include="ReadMe\MicrosoftOfficeManual.md" />
+    <None Include="ReadMe\LibreOfficeManual.md" />
+    <None Include="ReadMe\在IIS上存取%28Access%29使用Office COM元件%28Interop Word Excel%29的設定流程%28Configuration%29.docx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -76,9 +77,9 @@
       <Project>{a9906155-588e-49c8-9411-ca41fa3cc738}</Project>
       <Name>Creatidea.Library.Office.LibreOffice</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Creatidea.Library.Office.MicrosoftOffice\Creatidea.Library.Office.MicrosoftOffice.csproj">
+    <ProjectReference Include="..\Creatidea.Library.Office.MicrosoftOffice\Creatidea.Library.Office.MsOffice.csproj">
       <Project>{7da5f16e-fc8a-4c56-b25f-3decfcd34f1d}</Project>
-      <Name>Creatidea.Library.Office.MicrosoftOffice</Name>
+      <Name>Creatidea.Library.Office.MsOffice</Name>
     </ProjectReference>
     <ProjectReference Include="..\Creatidea.Library.Office.OpenOffice\Creatidea.Library.Office.OpenOffice.csproj">
       <Project>{37302e38-106f-454b-a54b-10753de65fca}</Project>
