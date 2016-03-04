@@ -26,10 +26,12 @@ namespace Creatidea.Library.Office.Example
             string docxPath = Path.Combine(appDirectory, "Demo\\Word", "Demo.docx");
             string xlsPath = Path.Combine(appDirectory, "Demo\\Excel", "Demo.xls");
             string xlsxPath = Path.Combine(appDirectory, "Demo\\Excel", "Demo.xlsx");
+            string pptPath = Path.Combine(appDirectory, "Demo\\Ppt", "Demo.ppt");
+            string pptxPath = Path.Combine(appDirectory, "Demo\\Ppt", "Demo.pptx");
 
             DemoLibreOffice(docPath, docxPath);
 
-            DemoMicrosoftOffice(docPath, docxPath, xlsPath, xlsxPath);
+            DemoMicrosoftOffice(docPath, docxPath, xlsPath, xlsxPath, pptPath, pptxPath);
         }
 
         /// <summary>
@@ -39,7 +41,15 @@ namespace Creatidea.Library.Office.Example
         /// <param name="docxPath">The docx path.</param>
         /// <param name="xlsPath">The XLS path.</param>
         /// <param name="xlsxPath">The XLSX path.</param>
-        private static void DemoMicrosoftOffice(string docPath, string docxPath, string xlsPath, string xlsxPath)
+        /// <param name="pptPath">The PPT path.</param>
+        /// <param name="pptxPath">The PPTX path.</param>
+        private static void DemoMicrosoftOffice(
+            string docPath,
+            string docxPath,
+            string xlsPath,
+            string xlsxPath,
+            string pptPath,
+            string pptxPath)
         {
             Console.WriteLine("========================================");
             Console.WriteLine("示範 MicrosoftOffice");
@@ -85,7 +95,10 @@ namespace Creatidea.Library.Office.Example
 
             Console.WriteLine();
             Console.WriteLine("xlsx 轉為 pdf：");
-            var xlsxResult = MsOffice.OfficeConverter.ExcelToPdf(xlsxPath, XlPaperSize.xlPaperB5, XlPageOrientation.xlLandscape);
+            var xlsxResult = MsOffice.OfficeConverter.ExcelToPdf(
+                xlsxPath,
+                XlPaperSize.xlPaperA4,
+                XlPageOrientation.xlLandscape);
             if (!xlsxResult.Success)
             {
                 Console.WriteLine("發生錯誤：{0}", xlsxResult.Message);
@@ -94,6 +107,32 @@ namespace Creatidea.Library.Office.Example
             {
                 var link = SaveFile(xlsxResult.Data, "msxlsx.pdf");
                 Console.WriteLine("Show xlsxResult: {0}", link);
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("ppt 轉為 pdf：");
+            var pptResult = MsOffice.OfficeConverter.PptToPdf(pptPath);
+            if (!pptResult.Success)
+            {
+                Console.WriteLine("發生錯誤：{0}", pptResult.Message);
+            }
+            else
+            {
+                var link = SaveFile(pptResult.Data, "msppt.pdf");
+                Console.WriteLine("Show pptResult: {0}", link);
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("pptx 轉為 pdf：");
+            var pptxResult = MsOffice.OfficeConverter.PptToPdf(pptxPath);
+            if (!pptxResult.Success)
+            {
+                Console.WriteLine("發生錯誤：{0}", pptxResult.Message);
+            }
+            else
+            {
+                var link = SaveFile(pptxResult.Data, "mspptx.pdf");
+                Console.WriteLine("Show pptxResult: {0}", link);
             }
         }
 

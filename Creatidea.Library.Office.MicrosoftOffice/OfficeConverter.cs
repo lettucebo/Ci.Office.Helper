@@ -13,6 +13,7 @@ namespace Creatidea.Library.Office.MsOffice
 
     using Microsoft.Office.Core;
     using Microsoft.Office.Interop.Excel;
+    using Microsoft.Office.Interop.PowerPoint;
 
     /// <summary>
     /// Microsoft Office OfficeConverter.
@@ -101,24 +102,16 @@ namespace Creatidea.Library.Office.MsOffice
             try
             {
                 var excelApp = new Microsoft.Office.Interop.Excel.Application();
-                Microsoft.Office.Interop.Excel.Workbook book = excelApp.Workbooks.Open(inputFilePath);
+                Workbook book = excelApp.Workbooks.Open(inputFilePath);
 
-                // todo 提供大小與方向設定，以下設定會以A4大小印出所設定的大小與方向
                 foreach (Worksheet sheet in book.Sheets)
                 {
                     sheet.PageSetup.PaperSize = paperSize;
                     sheet.PageSetup.Orientation = orientation;
-                    // todo 提供以下設定選項供使用者使用
-                    //// Fit Sheet on One Page 
-                    //sheet.PageSetup.FitToPagesWide = 1;
-                    //sheet.PageSetup.FitToPagesTall = 1;
-                    //// Normal Margins
-                    //sheet.PageSetup.LeftMargin = excelApp.InchesToPoints(0.7);
-                    //sheet.PageSetup.RightMargin = excelApp.InchesToPoints(0.7);
-                    //sheet.PageSetup.TopMargin = excelApp.InchesToPoints(0.75);
-                    //sheet.PageSetup.BottomMargin = excelApp.InchesToPoints(0.75);
-                    //sheet.PageSetup.HeaderMargin = excelApp.InchesToPoints(0.3);
-                    //sheet.PageSetup.FooterMargin = excelApp.InchesToPoints(0.3);
+
+                    // Fit Sheet on One Page 
+                    sheet.PageSetup.FitToPagesWide = 1;
+                    sheet.PageSetup.FitToPagesTall = 1;
                 }
 
                 outputPath = Path.Combine(outputDir, outputFileName + ".pdf");
@@ -164,15 +157,15 @@ namespace Creatidea.Library.Office.MsOffice
             try
             {
                 var pptApp = new Microsoft.Office.Interop.PowerPoint.Application();
-                Microsoft.Office.Interop.PowerPoint.Presentation presentation = pptApp.Presentations.Open(
+                Presentation presentation = pptApp.Presentations.Open(
                     inputFilePath,
                     MsoTriState.msoTrue,
                     MsoTriState.msoFalse,
                     MsoTriState.msoFalse);
 
                 outputPath = Path.Combine(outputDir, outputFileName + ".pdf");
-                presentation.SaveAs(outputPath, Microsoft.Office.Interop.PowerPoint.PpSaveAsFileType.ppSaveAsPDF);
-                pptApp.Visible = MsoTriState.msoFalse;
+                presentation.SaveAs(outputPath, PpSaveAsFileType.ppSaveAsPDF);
+                pptApp.DisplayAlerts = PpAlertLevel.ppAlertsNone;
                 pptApp.Quit();
             }
             catch (Exception ex)
