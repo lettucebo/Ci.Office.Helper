@@ -32,8 +32,7 @@ using Creatidea.Library.Office.MsOffice;
 ## 環境設定
 根據不同的 Office 版本要參考不同版本號的 dll
 
-- Office 2016
-  - Office 2016 的版本號為`16` 
+- Office 2016 的版本號為`16` 
   - 加入 COM 類別的 Microsoft Office 16.0 Object Library
     - ![ 加入 COM 類別](http://i.imgur.com/A1fVGzK.png)
   - 加入組件參考
@@ -41,6 +40,9 @@ using Creatidea.Library.Office.MsOffice;
     - Microsoft.Office.Interrop.PowerPoint
     - Microsoft.Office.Interrop.Word
       - ![加入組件參考](http://i.imgur.com/r1MpXjY.png)
+- Office 2013的版本號為`15` 
+- Office 2010的版本號為`14` 
+- Office 2007的版本號為`12` 
 
 ## 開始開發
 

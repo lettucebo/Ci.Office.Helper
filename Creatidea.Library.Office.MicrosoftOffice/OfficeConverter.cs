@@ -11,11 +11,19 @@ namespace Creatidea.Library.Office.MsOffice
 
     using Creatidea.Library.Results;
 
+    using Microsoft.Office.Core;
+    using Microsoft.Office.Interop.Excel;
+
     /// <summary>
     /// Microsoft Office OfficeConverter.
     /// </summary>
     public class OfficeConverter
     {
+        /// <summary>
+        /// Words to PDF.
+        /// </summary>
+        /// <param name="inputFilePath">The input file path.</param>
+        /// <returns>CiResult&lt;System.String&gt;Pdf檔案路徑.</returns>
         [STAThread]
         public static CiResult<string> WordToPdf(string inputFilePath)
         {
@@ -29,14 +37,10 @@ namespace Creatidea.Library.Office.MsOffice
             }
 
             string outputDir = Path.GetTempPath();
-            string outputFileName = string.Empty;
+            string outputFileName = Guid.NewGuid().ToString().ToUpper();
             string outputPath = string.Empty;
 
-            if (File.Exists(inputFilePath))
-            {
-                outputFileName = Path.GetFileNameWithoutExtension(inputFilePath);
-            }
-            else
+            if (!File.Exists(inputFilePath))
             {
                 result.Message += string.Format("找不到檔案：{0}！", inputFilePath);
                 return result;
@@ -60,6 +64,125 @@ namespace Creatidea.Library.Office.MsOffice
 
             result.Success = true;
             result.Message = "Word轉Pdf成功";
+            result.Data = outputPath;
+
+            return result;
+        }
+
+        /// <summary>
+        /// Excels to PDF.
+        /// </summary>
+        /// <param name="inputFilePath">The input file path.</param>
+        /// <param name="paperSize">Size of the paper.</param>
+        /// <param name="orientation">The paper orientation.</param>
+        /// <returns>CiResult&lt;System.String&gt;Pdf檔案路徑.</returns>
+        [STAThread]
+        public static CiResult<string> ExcelToPdf(string inputFilePath, XlPaperSize paperSize = XlPaperSize.xlPaperA4, XlPageOrientation orientation = XlPageOrientation.xlLandscape)
+        {
+            var result = new CiResult<string>() { Message = "Excel轉Pdf失敗！" };
+
+            var ext = Path.GetExtension(inputFilePath);
+            if (string.IsNullOrEmpty(ext) || (!ext.Equals(".xls") && !ext.Equals(".xlsx")))
+            {
+                result.Message += "副檔名錯誤！應為*.xls, *.xlsx";
+                return result;
+            }
+
+            string outputDir = Path.GetTempPath();
+            string outputFileName = Guid.NewGuid().ToString().ToUpper();
+            string outputPath = string.Empty;
+
+            if (!File.Exists(inputFilePath))
+            {
+                result.Message += string.Format("找不到檔案：{0}！", inputFilePath);
+                return result;
+            }
+
+            try
+            {
+                var excelApp = new Microsoft.Office.Interop.Excel.Application();
+                Microsoft.Office.Interop.Excel.Workbook book = excelApp.Workbooks.Open(inputFilePath);
+
+                // todo 提供大小與方向設定，以下設定會以A4大小印出所設定的大小與方向
+                foreach (Worksheet sheet in book.Sheets)
+                {
+                    sheet.PageSetup.PaperSize = paperSize;
+                    sheet.PageSetup.Orientation = orientation;
+                    // todo 提供以下設定選項供使用者使用
+                    //// Fit Sheet on One Page 
+                    //sheet.PageSetup.FitToPagesWide = 1;
+                    //sheet.PageSetup.FitToPagesTall = 1;
+                    //// Normal Margins
+                    //sheet.PageSetup.LeftMargin = excelApp.InchesToPoints(0.7);
+                    //sheet.PageSetup.RightMargin = excelApp.InchesToPoints(0.7);
+                    //sheet.PageSetup.TopMargin = excelApp.InchesToPoints(0.75);
+                    //sheet.PageSetup.BottomMargin = excelApp.InchesToPoints(0.75);
+                    //sheet.PageSetup.HeaderMargin = excelApp.InchesToPoints(0.3);
+                    //sheet.PageSetup.FooterMargin = excelApp.InchesToPoints(0.3);
+                }
+
+                outputPath = Path.Combine(outputDir, outputFileName + ".pdf");
+                book.SaveAs(outputPath, (XlFileFormat)57);
+                excelApp.Visible = false;
+                excelApp.DisplayAlerts = false;
+                excelApp.Quit();
+            }
+            catch (Exception ex)
+            {
+                result.Message += ex.ToString();
+                return result;
+            }
+
+            result.Success = true;
+            result.Message = "Excel轉Pdf成功";
+            result.Data = outputPath;
+
+            return result;
+        }
+
+        public static CiResult<string> PptToPdf(string inputFilePath)
+        {
+            var result = new CiResult<string>() { Message = "Ppt轉Pdf失敗！" };
+
+            var ext = Path.GetExtension(inputFilePath);
+            if (string.IsNullOrEmpty(ext) || (!ext.Equals(".ppt") && !ext.Equals(".pptx")))
+            {
+                result.Message += "副檔名錯誤！應為*.ppt, *.pptx";
+                return result;
+            }
+
+            string outputDir = Path.GetTempPath();
+            string outputFileName = Guid.NewGuid().ToString().ToUpper();
+            string outputPath = string.Empty;
+
+            if (!File.Exists(inputFilePath))
+            {
+                result.Message += string.Format("找不到檔案：{0}！", inputFilePath);
+                return result;
+            }
+
+            try
+            {
+                var pptApp = new Microsoft.Office.Interop.PowerPoint.Application();
+                Microsoft.Office.Interop.PowerPoint.Presentation presentation = pptApp.Presentations.Open(
+                    inputFilePath,
+                    MsoTriState.msoTrue,
+                    MsoTriState.msoFalse,
+                    MsoTriState.msoFalse);
+
+                outputPath = Path.Combine(outputDir, outputFileName + ".pdf");
+                presentation.SaveAs(outputPath, Microsoft.Office.Interop.PowerPoint.PpSaveAsFileType.ppSaveAsPDF);
+                pptApp.Visible = MsoTriState.msoFalse;
+                pptApp.Quit();
+            }
+            catch (Exception ex)
+            {
+                result.Message += ex.ToString();
+                return result;
+            }
+
+            result.Success = true;
+            result.Message = "Ppt轉Pdf成功";
             result.Data = outputPath;
 
             return result;

@@ -8,6 +8,8 @@ namespace Creatidea.Library.Office.Example
 {
     using System.IO;
 
+    using Microsoft.Office.Interop.Excel;
+
     /// <summary>
     /// 範例程式
     /// </summary>
@@ -22,10 +24,12 @@ namespace Creatidea.Library.Office.Example
             string appDirectory = Directory.GetCurrentDirectory();
             string docPath = Path.Combine(appDirectory, "Demo\\Word", "Demo.doc");
             string docxPath = Path.Combine(appDirectory, "Demo\\Word", "Demo.docx");
+            string xlsPath = Path.Combine(appDirectory, "Demo\\Excel", "Demo.xls");
+            string xlsxPath = Path.Combine(appDirectory, "Demo\\Excel", "Demo.xlsx");
 
             DemoLibreOffice(docPath, docxPath);
 
-            DemoMicrosoftOffice(docPath, docxPath);
+            DemoMicrosoftOffice(docPath, docxPath, xlsPath, xlsxPath);
         }
 
         /// <summary>
@@ -33,7 +37,9 @@ namespace Creatidea.Library.Office.Example
         /// </summary>
         /// <param name="docPath">The doc path.</param>
         /// <param name="docxPath">The docx path.</param>
-        private static void DemoMicrosoftOffice(string docPath, string docxPath)
+        /// <param name="xlsPath">The XLS path.</param>
+        /// <param name="xlsxPath">The XLSX path.</param>
+        private static void DemoMicrosoftOffice(string docPath, string docxPath, string xlsPath, string xlsxPath)
         {
             Console.WriteLine("========================================");
             Console.WriteLine("示範 MicrosoftOffice");
@@ -62,6 +68,32 @@ namespace Creatidea.Library.Office.Example
             {
                 var link = SaveFile(docxResult.Data, "msdocx.pdf");
                 Console.WriteLine("Show docxResult: {0}", link);
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("xls 轉為 pdf：");
+            var xlsResult = MsOffice.OfficeConverter.ExcelToPdf(xlsPath);
+            if (!xlsResult.Success)
+            {
+                Console.WriteLine("發生錯誤：{0}", xlsResult.Message);
+            }
+            else
+            {
+                var link = SaveFile(xlsResult.Data, "msxls.pdf");
+                Console.WriteLine("Show xlsResult: {0}", link);
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("xlsx 轉為 pdf：");
+            var xlsxResult = MsOffice.OfficeConverter.ExcelToPdf(xlsxPath, XlPaperSize.xlPaperB5, XlPageOrientation.xlLandscape);
+            if (!xlsxResult.Success)
+            {
+                Console.WriteLine("發生錯誤：{0}", xlsxResult.Message);
+            }
+            else
+            {
+                var link = SaveFile(xlsxResult.Data, "msxlsx.pdf");
+                Console.WriteLine("Show xlsxResult: {0}", link);
             }
         }
 
