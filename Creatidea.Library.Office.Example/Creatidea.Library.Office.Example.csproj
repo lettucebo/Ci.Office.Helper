@@ -36,10 +36,6 @@
       <HintPath>..\packages\Creatidea.Library.Configs.1.0.4\lib\Creatidea.Library.Configs.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Creatidea.Library.Results, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Creatidea.Library.Results.1.0.0\lib\Creatidea.Library.Results.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>

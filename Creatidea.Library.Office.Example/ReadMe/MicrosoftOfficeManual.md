@@ -46,19 +46,56 @@ using Creatidea.Library.Office.MsOffice;
 
 ## 開始開發
 
-直接呼叫 **LibreOffice.OfficeConverter.WordToPdf(filePath)** 傳入 Word 完整檔案路徑即可
+#### Word To Pdf
+
+直接呼叫 **LibreOffice.OfficeConverter.WordToPdf(filePath)** 傳入 Word 檔案完整路徑即可
 可傳入`*.doc` 或 `*.docx`
 ```csharp
 var docResult = MsOffice.OfficeConverter.WordToPdf(docPath);
-if (!docResult.Success)
-{
-    Console.WriteLine("發生錯誤：{0}", docResult.Message);
-}
-else
-{
-    var link = SaveFile(docResult.Data, "msdoc.pdf");
-    Console.WriteLine("Show docResult: {0}", link);
-}
+var link = SaveFile(docResult, "msdoc.pdf");
+Console.WriteLine("Show docResult: {0}", link);
+```
+```csharp
+var docxResult = MsOffice.OfficeConverter.WordToPdf(docxPath);
+var linkdocx = SaveFile(docxResult, "msdocx.pdf");
+Console.WriteLine("Show docxResult: {0}", linkdocx);
+```
+
+#### Excel To Pdf
+
+直接呼叫 **LibreOffice.OfficeConverter.ExcelToPdf(filePath)** 傳入 Excel 檔案完整路徑即可
+可傳入`*.xls` 或 `*.xlsx`
+```csharp
+var xlsResult = MsOffice.OfficeConverter.ExcelToPdf(xlsPath);
+var linkxls = SaveFile(xlsResult, "msxls.pdf");
+Console.WriteLine("Show xlsResult: {0}", linkxls);
+```
+```csharp
+Console.WriteLine("xlsx 轉為 pdf：");
+// 一定使用輸出為整頁
+var xlsxResult = MsOffice.OfficeConverter.ExcelToPdf(xlsxPath);
+// 提供尺寸與方向選項
+var xlsxResult2 = MsOffice.OfficeConverter.ExcelToPdf(
+    xlsxPath,
+    XlPaperSize.xlPaperB4,
+    XlPageOrientation.xlPortrait);
+var linkxlsx = SaveFile(xlsxResult, "msxlsx.pdf");
+Console.WriteLine("Show xlsxResult: {0}", linkxlsx);
+```
+
+#### PowerPoint To Pdf
+
+直接呼叫 **LibreOffice.OfficeConverter.PptToPdf(filePath)** 傳入 PowerPoint 檔案完整路徑即可
+可傳入`*.doc` 或 `*.docx`
+```csharp
+var pptResult = MsOffice.OfficeConverter.PptToPdf(pptPath);
+var linkppt = SaveFile(pptResult, "msppt.pdf");
+Console.WriteLine("Show pptResult: {0}", linkppt);
+```
+```csharp
+var pptxResult = MsOffice.OfficeConverter.PptToPdf(pptxPath);
+var linkpptx = SaveFile(pptxResult, "mspptx.pdf");
+Console.WriteLine("Show pptxResult: {0}", linkpptx);
 ```
 
 ## 相關問題處理步驟

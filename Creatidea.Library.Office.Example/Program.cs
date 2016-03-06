@@ -29,9 +29,9 @@ namespace Creatidea.Library.Office.Example
             string pptPath = Path.Combine(appDirectory, "Demo\\Ppt", "Demo.ppt");
             string pptxPath = Path.Combine(appDirectory, "Demo\\Ppt", "Demo.pptx");
 
-            DemoLibreOffice(docPath, docxPath);
+            DemoLibreOffice(docPath, docxPath, xlsPath, xlsxPath, pptPath, pptxPath);
 
-            DemoMicrosoftOffice(docPath, docxPath, xlsPath, xlsxPath, pptPath, pptxPath);
+            //DemoMicrosoftOffice(docPath, docxPath, xlsPath, xlsxPath, pptPath, pptxPath);
         }
 
         /// <summary>
@@ -57,83 +57,44 @@ namespace Creatidea.Library.Office.Example
             Console.WriteLine();
             Console.WriteLine("doc 轉為 pdf：");
             var docResult = MsOffice.OfficeConverter.WordToPdf(docPath);
-            if (!docResult.Success)
-            {
-                Console.WriteLine("發生錯誤：{0}", docResult.Message);
-            }
-            else
-            {
-                var link = SaveFile(docResult.Data, "msdoc.pdf");
-                Console.WriteLine("Show docResult: {0}", link);
-            }
+            var linkdoc = SaveFile(docResult, "msdoc.pdf");
+            Console.WriteLine("Show docResult: {0}", linkdoc);
 
             Console.WriteLine();
             Console.WriteLine("docx 轉為 pdf：");
             var docxResult = MsOffice.OfficeConverter.WordToPdf(docxPath);
-            if (!docxResult.Success)
-            {
-                Console.WriteLine("發生錯誤：{0}", docxResult.Message);
-            }
-            else
-            {
-                var link = SaveFile(docxResult.Data, "msdocx.pdf");
-                Console.WriteLine("Show docxResult: {0}", link);
-            }
+            var linkdocx = SaveFile(docxResult, "msdocx.pdf");
+            Console.WriteLine("Show docxResult: {0}", linkdocx);
 
             Console.WriteLine();
             Console.WriteLine("xls 轉為 pdf：");
             var xlsResult = MsOffice.OfficeConverter.ExcelToPdf(xlsPath);
-            if (!xlsResult.Success)
-            {
-                Console.WriteLine("發生錯誤：{0}", xlsResult.Message);
-            }
-            else
-            {
-                var link = SaveFile(xlsResult.Data, "msxls.pdf");
-                Console.WriteLine("Show xlsResult: {0}", link);
-            }
+            var linkxls = SaveFile(xlsResult, "msxls.pdf");
+            Console.WriteLine("Show xlsResult: {0}", linkxls);
 
             Console.WriteLine();
             Console.WriteLine("xlsx 轉為 pdf：");
-            var xlsxResult = MsOffice.OfficeConverter.ExcelToPdf(
+            // 一定使用輸出為整頁
+            var xlsxResult = MsOffice.OfficeConverter.ExcelToPdf(xlsxPath);
+            // 提供尺寸與方向選項
+            var xlsxResult2 = MsOffice.OfficeConverter.ExcelToPdf(
                 xlsxPath,
-                XlPaperSize.xlPaperA4,
-                XlPageOrientation.xlLandscape);
-            if (!xlsxResult.Success)
-            {
-                Console.WriteLine("發生錯誤：{0}", xlsxResult.Message);
-            }
-            else
-            {
-                var link = SaveFile(xlsxResult.Data, "msxlsx.pdf");
-                Console.WriteLine("Show xlsxResult: {0}", link);
-            }
+                XlPaperSize.xlPaperB4,
+                XlPageOrientation.xlPortrait);
+            var linkxlsx = SaveFile(xlsxResult, "msxlsx.pdf");
+            Console.WriteLine("Show xlsxResult: {0}", linkxlsx);
 
             Console.WriteLine();
             Console.WriteLine("ppt 轉為 pdf：");
             var pptResult = MsOffice.OfficeConverter.PptToPdf(pptPath);
-            if (!pptResult.Success)
-            {
-                Console.WriteLine("發生錯誤：{0}", pptResult.Message);
-            }
-            else
-            {
-                var link = SaveFile(pptResult.Data, "msppt.pdf");
-                Console.WriteLine("Show pptResult: {0}", link);
-            }
+            var linkppt = SaveFile(pptResult, "msppt.pdf");
+            Console.WriteLine("Show pptResult: {0}", linkppt);
 
             Console.WriteLine();
             Console.WriteLine("pptx 轉為 pdf：");
             var pptxResult = MsOffice.OfficeConverter.PptToPdf(pptxPath);
-            if (!pptxResult.Success)
-            {
-                Console.WriteLine("發生錯誤：{0}", pptxResult.Message);
-            }
-            else
-            {
-                var link = SaveFile(pptxResult.Data, "mspptx.pdf");
-                Console.WriteLine("Show pptxResult: {0}", link);
-            }
+            var linkpptx = SaveFile(pptxResult, "mspptx.pdf");
+            Console.WriteLine("Show pptxResult: {0}", linkpptx);
         }
 
         /// <summary>
@@ -141,8 +102,18 @@ namespace Creatidea.Library.Office.Example
         /// </summary>
         /// <param name="docPath">The doc path.</param>
         /// <param name="docxPath">The docx path.</param>
+        /// <param name="xlsPath">The XLS path.</param>
+        /// <param name="xlsxPath">The XLSX path.</param>
+        /// <param name="pptPath">The PPT path.</param>
+        /// <param name="pptxPath">The PPTX path.</param>
         [STAThread]
-        private static void DemoLibreOffice(string docPath, string docxPath)
+        private static void DemoLibreOffice(
+            string docPath,
+            string docxPath,
+            string xlsPath,
+            string xlsxPath,
+            string pptPath,
+            string pptxPath)
         {
             Console.WriteLine("========================================");
             Console.WriteLine("示範 LibreOffice");
@@ -150,28 +121,38 @@ namespace Creatidea.Library.Office.Example
             Console.WriteLine();
             Console.WriteLine("doc 轉為 pdf：");
             var docResult = LibreOffice.OfficeConverter.WordToPdf(docPath);
-            if (!docResult.Success)
-            {
-                Console.WriteLine("發生錯誤：{0}", docResult.Message);
-            }
-            else
-            {
-                var link = SaveFile(docResult.Data, "libredoc.pdf");
-                Console.WriteLine("Show docResult: {0}", link);
-            }
+            var linkdoc = SaveFile(docResult, "libredoc.pdf");
+            Console.WriteLine("Show docResult: {0}", linkdoc);
 
             Console.WriteLine();
             Console.WriteLine("docx 轉為 pdf：");
             var docxResult = LibreOffice.OfficeConverter.WordToPdf(docxPath);
-            if (!docxResult.Success)
-            {
-                Console.WriteLine("發生錯誤：{0}", docxResult.Message);
-            }
-            else
-            {
-                var link = SaveFile(docxResult.Data, "libredocx.pdf");
-                Console.WriteLine("Show docxResult: {0}", link);
-            }
+            var linkdocx = SaveFile(docxResult, "libredocx.pdf");
+            Console.WriteLine("Show docxResult: {0}", linkdocx);
+
+            Console.WriteLine();
+            Console.WriteLine("xls 轉為 pdf：");
+            var xlsResult = LibreOffice.OfficeConverter.ExcelToPdf(xlsPath);
+            var linkxls = SaveFile(xlsResult, "librexls.pdf");
+            Console.WriteLine("Show xlsResult: {0}", linkxls);
+
+            Console.WriteLine();
+            Console.WriteLine("xlsx 轉為 pdf：");
+            var xlsxResult = LibreOffice.OfficeConverter.ExcelToPdf(xlsxPath);
+            var linkxlsx = SaveFile(xlsxResult, "librexlsx.pdf");
+            Console.WriteLine("Show xlsResult: {0}", linkxlsx);
+
+            Console.WriteLine();
+            Console.WriteLine("ppt 轉為 pdf：");
+            var pptResult = LibreOffice.OfficeConverter.PptToPdf(pptPath);
+            var linkppt = SaveFile(pptResult, "libreppt.pdf");
+            Console.WriteLine("Show pptResult: {0}", linkppt);
+
+            Console.WriteLine();
+            Console.WriteLine("pptx 轉為 pdf：");
+            var pptxResult = LibreOffice.OfficeConverter.PptToPdf(pptxPath);
+            var linkpptx = SaveFile(pptxResult, "librepptx.pdf");
+            Console.WriteLine("Show pptxResult: {0}", linkpptx);
         }
 
         /// <summary>
