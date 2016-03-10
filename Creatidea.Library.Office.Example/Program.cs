@@ -8,6 +8,8 @@ namespace Creatidea.Library.Office.Example
 {
     using System.IO;
 
+    using Creatidea.Library.Office.LibreOffice.Enums;
+
     using Microsoft.Office.Interop.Excel;
 
     /// <summary>
@@ -120,21 +122,39 @@ namespace Creatidea.Library.Office.Example
 
             Console.WriteLine();
             Console.WriteLine("doc 轉為 pdf：");
-            var docResult = LibreOffice.OfficeConverter.WordToPdf(docPath);
+            var docResult = LibreOffice.OfficeConverter.ConvertDocument(docPath, OutputExtensionType.pdf);
             var linkdoc = SaveFile(docResult, "libredoc.pdf");
             Console.WriteLine("Show docResult: {0}", linkdoc);
 
             Console.WriteLine();
             Console.WriteLine("docx 轉為 pdf：");
-            var docxResult = LibreOffice.OfficeConverter.WordToPdf(docxPath);
+            var docxResult = LibreOffice.OfficeConverter.ConvertDocument(docxPath, OutputExtensionType.pdf);
             var linkdocx = SaveFile(docxResult, "libredocx.pdf");
             Console.WriteLine("Show docxResult: {0}", linkdocx);
 
             Console.WriteLine();
             Console.WriteLine("xls 轉為 pdf：");
-            var xlsResult = LibreOffice.OfficeConverter.ExcelToPdf(xlsPath);
+            var xlsResult = LibreOffice.OfficeConverter.ConvertDocument(xlsPath, OutputExtensionType.pdf);
             var linkxls = SaveFile(xlsResult, "librexls.pdf");
             Console.WriteLine("Show xlsResult: {0}", linkxls);
+
+            Console.WriteLine();
+            Console.WriteLine("doc 轉為 odt：");
+            var odtResult = LibreOffice.OfficeConverter.ConvertDocument(docPath, OutputExtensionType.odt);
+            var linkodt = SaveFile(odtResult, "libredoc.odt");
+            Console.WriteLine("Show odtResult: {0}", linkodt);
+
+            Console.WriteLine();
+            Console.WriteLine("xls 轉為 ods：");
+            var odsResult = LibreOffice.OfficeConverter.ConvertDocument(xlsPath, OutputExtensionType.ods);
+            var linkods = SaveFile(odsResult, "libredocx.ods");
+            Console.WriteLine("Show odsResult: {0}", linkods);
+
+            Console.WriteLine();
+            Console.WriteLine("ppt 轉為 odp：");
+            var odpResult = LibreOffice.OfficeConverter.ConvertDocument(pptPath, OutputExtensionType.odp);
+            var linkodp = SaveFile(odpResult, "librexls.odt");
+            Console.WriteLine("Show odpResult: {0}", linkodp);
 
             Console.WriteLine();
             Console.WriteLine("xlsx 轉為 pdf：");
