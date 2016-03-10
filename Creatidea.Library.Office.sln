@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Creatidea.Library.Office.Li
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Creatidea.Library.Office.MsOffice", "Creatidea.Library.Office.MicrosoftOffice\Creatidea.Library.Office.MsOffice.csproj", "{7DA5F16E-FC8A-4C56-B25F-3DECFCD34F1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Creatidea.Library.Office.OpenOffice", "Creatidea.Library.Office.OpenOffice\Creatidea.Library.Office.OpenOffice.csproj", "{37302E38-106F-454B-A54B-10753DE65FCA}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installtion", "Installtion", "{5FD60ED6-173E-4C1E-BE41-B343ABBFF90B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LiberOffice", "LiberOffice", "{F584B400-010A-409E-9414-B61FA9817563}"
@@ -33,10 +31,6 @@ Global
 		{7DA5F16E-FC8A-4C56-B25F-3DECFCD34F1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DA5F16E-FC8A-4C56-B25F-3DECFCD34F1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DA5F16E-FC8A-4C56-B25F-3DECFCD34F1D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{37302E38-106F-454B-A54B-10753DE65FCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{37302E38-106F-454B-A54B-10753DE65FCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{37302E38-106F-454B-A54B-10753DE65FCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{37302E38-106F-454B-A54B-10753DE65FCA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{64FDE0A3-11D8-42C4-8949-F0440E1E97CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{64FDE0A3-11D8-42C4-8949-F0440E1E97CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64FDE0A3-11D8-42C4-8949-F0440E1E97CC}.Release|Any CPU.ActiveCfg = Release|Any CPU

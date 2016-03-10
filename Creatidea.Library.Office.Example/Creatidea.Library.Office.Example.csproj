@@ -101,10 +101,6 @@
       <Project>{7da5f16e-fc8a-4c56-b25f-3decfcd34f1d}</Project>
       <Name>Creatidea.Library.Office.MsOffice</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Creatidea.Library.Office.OpenOffice\Creatidea.Library.Office.OpenOffice.csproj">
-      <Project>{37302e38-106f-454b-a54b-10753de65fca}</Project>
-      <Name>Creatidea.Library.Office.OpenOffice</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
