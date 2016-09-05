@@ -8,7 +8,13 @@ namespace Creatidea.Library.Office.Example
 {
     using System.IO;
 
+    using Ci.Extensions;
+
     using Creatidea.Library.Office.LibreOffice.Enums;
+    using Creatidea.Library.Office.OpenXml;
+    using Creatidea.Library.Office.OpenXml.Enums;
+    using Creatidea.Library.Office.OpenXml.Manager;
+    using Creatidea.Library.Office.OpenXml.Models;
 
     using Microsoft.Office.Interop.Excel;
 
@@ -30,6 +36,7 @@ namespace Creatidea.Library.Office.Example
             string xlsxPath = Path.Combine(appDirectory, "Demo\\Excel", "Demo.xlsx");
             string pptPath = Path.Combine(appDirectory, "Demo\\Ppt", "Demo.ppt");
             string pptxPath = Path.Combine(appDirectory, "Demo\\Ppt", "Demo.pptx");
+            string docxTemplatePath = Path.Combine(appDirectory, "Demo\\Word", "Template.docx");
 
             Console.WriteLine("Office Relate Library Demo:");
             Console.WriteLine("1. Use LibreOffice convert ms document type to Open Document Format(odf)");
@@ -52,11 +59,100 @@ namespace Creatidea.Library.Office.Example
                     DemoMicrosoftOffice(docPath, docxPath, xlsPath, xlsxPath, pptPath, pptxPath);
                     break;
                 case 52:
+                    UseOpenXmlToDocx(docxTemplatePath);
                     break;
                 default:
-                    Console.WriteLine("Wrong option.");
+                    Console.WriteLine("Unknow option.");
                     break;
             }
+        }
+
+        private static void UseOpenXmlToDocx(string docxTemplatePath)
+        {
+            Console.WriteLine("========================================");
+            Console.WriteLine("Open Xml template to docx");
+
+            Console.WriteLine();
+            Console.WriteLine("template to docx：");
+
+            #region parameter dictionary
+
+            var textDict = new Dictionary<string, OpenXmlTextInfo>
+             {
+               {"SDT01",new OpenXmlTextInfo(){Text = "12345678", IsInnerXml = false}},
+               {"SDT02",new OpenXmlTextInfo(){Text = "Money Yu", IsInnerXml = false}},
+               {"SDT03",new OpenXmlTextInfo(){Text = "Creatidea", IsInnerXml = false}},
+               {"SDT04",new OpenXmlTextInfo(){Text = WordSymbols.UnChecked.GetDescription(), IsInnerXml = true}},
+
+               {"SDT05",new OpenXmlTextInfo(){Text = "Abc12207" , IsInnerXml = false}},
+               {"SDT06",new OpenXmlTextInfo(){Text = "+886912345678", IsInnerXml = false}},
+
+                // start demo: for parameter initialize, will update parameter later
+               {"SDT07",new OpenXmlTextInfo(){Text = WordSymbols.UnChecked.GetDescription(), IsInnerXml = true}},
+               {"SDT08",new OpenXmlTextInfo(){Text = WordSymbols.UnChecked.GetDescription(), IsInnerXml = true}},
+               {"SDT09",new OpenXmlTextInfo(){Text = WordSymbols.UnChecked.GetDescription(), IsInnerXml = true}},
+               {"SDT10",new OpenXmlTextInfo(){Text = WordSymbols.UnChecked.GetDescription(), IsInnerXml = true}},
+               {"SDT11",new OpenXmlTextInfo(){Text = string.Empty, IsInnerXml = false}},
+
+               {"SDT12",new OpenXmlTextInfo(){Text = WordSymbols.UnChecked.GetDescription(), IsInnerXml = true}},
+               {"SDT13",new OpenXmlTextInfo(){Text = WordSymbols.Checked.GetDescription(), IsInnerXml = true}},
+               {"SDT14",new OpenXmlTextInfo(){Text = WordSymbols.UnChecked.GetDescription(), IsInnerXml = true}},
+               {"SDT15",new OpenXmlTextInfo(){Text = WordSymbols.Checked.GetDescription(), IsInnerXml = true}},
+               {"SDT16",new OpenXmlTextInfo(){Text = WordSymbols.UnChecked.GetDescription(), IsInnerXml = true}},
+                // end demo: for parameter initialize, will update parameter later
+
+               {"SDT17",new OpenXmlTextInfo(){Text = "9F, No.1, Sec.4, Nanjing E. Rd., Songshan Dist., Taipei City, Taiwan ", IsInnerXml = false}},
+               {"SDT18",new OpenXmlTextInfo(){Text = "2806-1479", IsInnerXml = false}},
+               {"SDT19",new OpenXmlTextInfo(){Text = "For Test", IsInnerXml = false}},
+               {"SDT20",new OpenXmlTextInfo(){Text = "100", IsInnerXml = false}},
+               {"SDT21",new OpenXmlTextInfo(){Text = "200", IsInnerXml = false}},
+               {"SDT22",new OpenXmlTextInfo(){Text = "300", IsInnerXml = false}},
+               {"SDT23",new OpenXmlTextInfo(){Text = "3", IsInnerXml = false}},
+               {"SDT24",new OpenXmlTextInfo(){Text = "2", IsInnerXml = false}},
+               {"SDT25",new OpenXmlTextInfo(){Text = "1", IsInnerXml = false}},
+               {"SDT26",new OpenXmlTextInfo(){Text = "1", IsInnerXml = false}},
+               {"SDT27",new OpenXmlTextInfo(){Text = "abc12207@gmail.com", IsInnerXml = false}}
+            };
+
+            var imageDict = new Dictionary<string, MemoryStream>();
+
+            imageDict.Add("SDTI01", WordManager.GetStreamFromImagePath(Path.Combine(Directory.GetCurrentDirectory(), "Demo\\Image", "Creatidea.png")));
+            imageDict.Add("SDTI02", WordManager.GetStreamFromImagePath("C:/NotExistImage.jpg"));
+
+            // start demo: use dynamic parameter, if random%2 == 0 ,then set to checked
+            Random rand = new Random(Guid.NewGuid().GetHashCode());
+            if (rand.Next(1, 3) % 2 == 0)
+            {
+                textDict["SDT07"] = new OpenXmlTextInfo()
+                { Text = WordSymbols.Checked.GetDescription(), IsInnerXml = true };
+            }
+
+            if (rand.Next(1, 3) % 2 == 0)
+            {
+                textDict["SDT08"] = new OpenXmlTextInfo()
+                { Text = WordSymbols.Checked.GetDescription(), IsInnerXml = true };
+            }
+
+            if (rand.Next(1, 3) % 2 == 0)
+            {
+                textDict["SDT09"] = new OpenXmlTextInfo()
+                { Text = WordSymbols.Checked.GetDescription(), IsInnerXml = true };
+            }
+
+            if (rand.Next(1, 3) % 2 == 0)
+            {
+                textDict["SDT10"] = new OpenXmlTextInfo()
+                { Text = WordSymbols.Checked.GetDescription(), IsInnerXml = true };
+            }
+            // end demo: use dynamic parameter
+
+            #endregion
+
+            var template = new Template();
+            var filePath = template.DocxMaker(docxTemplatePath, textDict, imageDict);
+            var linkdocx = SaveFile(filePath, "templatedocx.docx");
+            Console.WriteLine("Show docResult: {0}", linkdocx);
+            Console.WriteLine(Enum.GetName(typeof(WordSymbols), WordSymbols.UnChecked));
         }
 
         /// <summary>
@@ -77,7 +173,7 @@ namespace Creatidea.Library.Office.Example
             string pptxPath)
         {
             Console.WriteLine("========================================");
-            Console.WriteLine("示範 MicrosoftOffice");
+            Console.WriteLine("Microsoft Office to pdf");
 
             Console.WriteLine();
             Console.WriteLine("doc 轉為 pdf：");

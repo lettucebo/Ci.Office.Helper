@@ -79,7 +79,7 @@
 
                         if (parantElement != null)
                         {
-                            Run r = parantElement.Descendants<Run>().SingleOrDefault();
+                            Run r = parantElement.Descendants<Run>().FirstOrDefault();
 
                             if (r != null)
                             {
@@ -282,14 +282,14 @@
         /// </summary>
         /// <param name="imagePath">The image path.</param>
         /// <returns>MemoryStream.</returns>
-        protected static MemoryStream GetStreamFromImagePath(string imagePath)
+        public static MemoryStream GetStreamFromImagePath(string imagePath)
         {
             if (!File.Exists(imagePath))
             {
                 // can not find image, use default
                 // read embedded resource
                 _assembly = Assembly.GetExecutingAssembly();
-                _imageStream = _assembly.GetManifestResourceStream("Creatidea.Library.Office.OpenXml.default.jpg");
+                _imageStream = _assembly.GetManifestResourceStream("Creatidea.Library.Office.OpenXml.Resources.Default.png");
 
                 MemoryStream ms = new MemoryStream();
                 _imageStream.CopyTo(ms);
