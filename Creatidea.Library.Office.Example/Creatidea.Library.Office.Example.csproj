@@ -85,9 +85,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
-    <None Include="ReadMe\MicrosoftOfficeManual.md" />
-    <None Include="ReadMe\LibreOfficeManual.md" />
-    <None Include="ReadMe\在IIS上存取%28Access%29使用Office COM元件%28Interop Word Excel%29的設定流程%28Configuration%29.docx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

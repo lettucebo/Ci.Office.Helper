@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Creatidea.Library.Office.LibreOffice", "Creatidea.Library.Office.LibreOffice\Creatidea.Library.Office.LibreOffice.csproj", "{A9906155-588E-49C8-9411-CA41FA3CC738}"
 EndProject
@@ -16,6 +16,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LiberOffice", "LiberOffice"
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Creatidea.Library.Office.Example", "Creatidea.Library.Office.Example\Creatidea.Library.Office.Example.csproj", "{64FDE0A3-11D8-42C4-8949-F0440E1E97CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Creatidea.Library.Office.OpenXml", "Creatidea.Library.Office.OpenXml\Creatidea.Library.Office.OpenXml.csproj", "{4A0ED890-D08C-4EED-BB79-9FB3227C6951}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReadMe", "ReadMe", "{8E2215A4-DCB2-44EF-8264-32CCAB96F72F}"
+	ProjectSection(SolutionItems) = preProject
+		ReadMe\LibreOffice-Manual.md = ReadMe\LibreOffice-Manual.md
+		ReadMe\MicrosoftOffice-Manual.md = ReadMe\MicrosoftOffice-Manual.md
+		ReadMe\OpenXml-Manual.md = ReadMe\OpenXml-Manual.md
+		ReadMe\在IIS上存取(Access)使用Office COM元件(Interop Word Excel)的設定流程(Configuration).docx = ReadMe\在IIS上存取(Access)使用Office COM元件(Interop Word Excel)的設定流程(Configuration).docx
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +45,10 @@ Global
 		{64FDE0A3-11D8-42C4-8949-F0440E1E97CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64FDE0A3-11D8-42C4-8949-F0440E1E97CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64FDE0A3-11D8-42C4-8949-F0440E1E97CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A0ED890-D08C-4EED-BB79-9FB3227C6951}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A0ED890-D08C-4EED-BB79-9FB3227C6951}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A0ED890-D08C-4EED-BB79-9FB3227C6951}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A0ED890-D08C-4EED-BB79-9FB3227C6951}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

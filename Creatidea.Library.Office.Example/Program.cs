@@ -158,19 +158,19 @@ namespace Creatidea.Library.Office.Example
 
             Console.WriteLine();
             Console.WriteLine("xlsx 轉為 pdf：");
-            var xlsxResult = LibreOffice.OfficeConverter.ExcelToPdf(xlsxPath);
+            var xlsxResult = LibreOffice.OfficeConverter.ConvertDocument(xlsxPath, OutputExtensionType.ods);
             var linkxlsx = SaveFile(xlsxResult, "librexlsx.pdf");
             Console.WriteLine("Show xlsResult: {0}", linkxlsx);
 
             Console.WriteLine();
             Console.WriteLine("ppt 轉為 pdf：");
-            var pptResult = LibreOffice.OfficeConverter.PptToPdf(pptPath);
+            var pptResult = LibreOffice.OfficeConverter.ConvertDocument(pptPath, OutputExtensionType.odp);
             var linkppt = SaveFile(pptResult, "libreppt.pdf");
             Console.WriteLine("Show pptResult: {0}", linkppt);
 
             Console.WriteLine();
             Console.WriteLine("pptx 轉為 pdf：");
-            var pptxResult = LibreOffice.OfficeConverter.PptToPdf(pptxPath);
+            var pptxResult = LibreOffice.OfficeConverter.ConvertDocument(pptxPath, OutputExtensionType.odp);
             var linkpptx = SaveFile(pptxResult, "librepptx.pdf");
             Console.WriteLine("Show pptxResult: {0}", linkpptx);
         }
