@@ -85,6 +85,7 @@ namespace Creatidea.Library.Office.LibreOffice
                     }
                     return null;
                 case ".xls":
+                case ".xlsx":
                 case ".xlsb":
                 case ".ods":
                     if (outputExtensionType == OutputExtensionType.pdf)
