@@ -14,10 +14,10 @@
 
 ## 安裝 nuget 套件
 
-You can either <a href="https://github.com/lettucebo/Creatidea.Library.Office.git">download</a> the source and build your own dll or, if you have the NuGet package manager installed, you can grab them automatically.
+You can either <a href="https://github.com/lettucebo/Ci.Office.Helper.git">download</a> the source and build your own dll or, if you have the NuGet package manager installed, you can install them automatically.
 
 ```
-PM> Install-Package Creatidea.Library.OpenXml
+PM> Install-Package Ci.Office.Helper.OpenXml
 ```
 
 Once you have the libraries properly referenced in your project, you can include calls to them in your code. 
@@ -25,11 +25,8 @@ For a sample implementation, check the [Example](https://github.com/lettucebo/Cr
 
 Add the following namespaces to use the library:
 ```csharp
-using Creatidea.Library.Office.OpenXml;
+using Ci.Office.Helper.OpenXml;
 ```
-
-## 環境設定
-必須安裝 [Open XML SDK 2.5](https://www.microsoft.com/en-us/download/details.aspx?id=30425) 
 
 ## 開始開發
 
@@ -40,33 +37,39 @@ using Creatidea.Library.Office.OpenXml;
 
 並將每個內容控制項賦予唯一ID
 
-範例：[TemplateExample.docx]()
+範例：[WordTemplate.docx](https://github.com/lettucebo/Ci.Office.Helper/blob/master/Ci.Office.Helper.Example/Demo/Word/Template.docx)
 
+備註1. 圖片的內容控制項需先內置圖片，否則會發生未知原因的找不到控制項問題
 
 #### 2. 建立套版參數列表
 
-直接呼叫 **LibreOffice.OfficeConverter.ExcelToPdf(filePath)** 傳入 Excel 檔案完整路徑即可
-可傳入`*.xls` 或 `*.xlsx`
+依照需要套版的不同資料型態可區分為三種類型：文字、圖片、表格
 ```csharp
+// 欲塞入資料之文字類型列表
+var textDict = new Dictionary<string, OpenXmlTextInfo>();
 
+// 欲塞入資料之圖片類型列表
+var imgDict = new Dictionary<string, MemoryStream>();
+
+// 欲塞入資料之表格類型列表
+var tableDict = new Dictionary<string, DocumentFormat.OpenXml.Wordprocessing.Table>();
 ```
 
-#### 3. 呼叫 DocxMaker 進行處理
+詳細範例可參考：Ci.Office.Helper.Example/[Program.cs](https://github.com/lettucebo/Ci.Office.Helper/blob/master/Ci.Office.Helper.Example/Program.cs#L80-L213)
+
+#### 3. 呼叫 Template.DocxMaker 進行處理
 
 直接呼叫 **LibreOffice.OfficeConverter.PptToPdf(filePath)** 傳入 PowerPoint 檔案完整路徑即可
 可傳入`*.doc` 或 `*.docx`
 ```csharp
-var pptResult = MsOffice.OfficeConverter.PptToPdf(pptPath);
-var linkppt = SaveFile(pptResult, "msppt.pdf");
-Console.WriteLine("Show pptResult: {0}", linkppt);
-```
-```csharp
-var pptxResult = MsOffice.OfficeConverter.PptToPdf(pptxPath);
-var linkpptx = SaveFile(pptxResult, "mspptx.pdf");
-Console.WriteLine("Show pptxResult: {0}", linkpptx);
+// create template engine
+var template = new Template();
+
+// call DocxMaker to template the file
+var filePath = template.DocxMaker(docxTemplatePath, textDict, imageDict, tableDict);
 ```
 
 ## 備註
-- 應用程式要擁有暫存目錄寫入權限
+- 應用程式要擁有暫存目錄寫入權限，否則無法產生暫存檔進行套版
 
 ## 相關問題處理步驟
