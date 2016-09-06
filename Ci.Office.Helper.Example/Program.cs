@@ -1,27 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Creatidea.Library.Office.Example
+﻿namespace Ci.Office.Helper.Example
 {
+    using System;
+    using System.Collections.Generic;
     using System.IO;
 
     using Ci.Extensions;
+    using Ci.Office.Helper.OpenXml;
+    using Ci.Office.Helper.OpenXml.Enums;
+    using Ci.Office.Helper.OpenXml.Manager;
+    using Ci.Office.Helper.OpenXml.Models;
 
     using Creatidea.Library.Office.LibreOffice.Enums;
-    using Creatidea.Library.Office.OpenXml;
-    using Creatidea.Library.Office.OpenXml.Enums;
-    using Creatidea.Library.Office.OpenXml.Manager;
-    using Creatidea.Library.Office.OpenXml.Models;
 
     using DocumentFormat.OpenXml;
     using DocumentFormat.OpenXml.Wordprocessing;
 
     using Microsoft.Office.Interop.Excel;
-
-    using TableStyle = DocumentFormat.OpenXml.Wordprocessing.TableStyle;
 
     /// <summary>
     /// 範例程式
@@ -247,28 +241,28 @@ namespace Creatidea.Library.Office.Example
 
             Console.WriteLine();
             Console.WriteLine("doc 轉為 pdf：");
-            var docResult = MsOffice.OfficeConverter.WordToPdf(docPath);
+            var docResult = Creatidea.Library.Office.MsOffice.OfficeConverter.WordToPdf(docPath);
             var linkdoc = SaveFile(docResult, "msdoc.pdf");
             Console.WriteLine("Show docResult: {0}", linkdoc);
 
             Console.WriteLine();
             Console.WriteLine("docx 轉為 pdf：");
-            var docxResult = MsOffice.OfficeConverter.WordToPdf(docxPath);
+            var docxResult = Creatidea.Library.Office.MsOffice.OfficeConverter.WordToPdf(docxPath);
             var linkdocx = SaveFile(docxResult, "msdocx.pdf");
             Console.WriteLine("Show docxResult: {0}", linkdocx);
 
             Console.WriteLine();
             Console.WriteLine("xls 轉為 pdf：");
-            var xlsResult = MsOffice.OfficeConverter.ExcelToPdf(xlsPath);
+            var xlsResult = Creatidea.Library.Office.MsOffice.OfficeConverter.ExcelToPdf(xlsPath);
             var linkxls = SaveFile(xlsResult, "msxls.pdf");
             Console.WriteLine("Show xlsResult: {0}", linkxls);
 
             Console.WriteLine();
             Console.WriteLine("xlsx 轉為 pdf：");
             // 一定使用輸出為整頁
-            var xlsxResult = MsOffice.OfficeConverter.ExcelToPdf(xlsxPath);
+            var xlsxResult = Creatidea.Library.Office.MsOffice.OfficeConverter.ExcelToPdf(xlsxPath);
             // 提供尺寸與方向選項
-            var xlsxResult2 = MsOffice.OfficeConverter.ExcelToPdf(
+            var xlsxResult2 = Creatidea.Library.Office.MsOffice.OfficeConverter.ExcelToPdf(
                 xlsxPath,
                 XlPaperSize.xlPaperB4,
                 XlPageOrientation.xlPortrait);
@@ -277,13 +271,13 @@ namespace Creatidea.Library.Office.Example
 
             Console.WriteLine();
             Console.WriteLine("ppt 轉為 pdf：");
-            var pptResult = MsOffice.OfficeConverter.PptToPdf(pptPath);
+            var pptResult = Creatidea.Library.Office.MsOffice.OfficeConverter.PptToPdf(pptPath);
             var linkppt = SaveFile(pptResult, "msppt.pdf");
             Console.WriteLine("Show pptResult: {0}", linkppt);
 
             Console.WriteLine();
             Console.WriteLine("pptx 轉為 pdf：");
-            var pptxResult = MsOffice.OfficeConverter.PptToPdf(pptxPath);
+            var pptxResult = Creatidea.Library.Office.MsOffice.OfficeConverter.PptToPdf(pptxPath);
             var linkpptx = SaveFile(pptxResult, "mspptx.pdf");
             Console.WriteLine("Show pptxResult: {0}", linkpptx);
         }
@@ -311,37 +305,37 @@ namespace Creatidea.Library.Office.Example
 
             Console.WriteLine();
             Console.WriteLine("doc 轉為 odt：");
-            var odtResult = LibreOffice.OfficeConverter.ConvertDocument(docPath, OutputExtensionType.odt);
+            var odtResult = Creatidea.Library.Office.LibreOffice.OfficeConverter.ConvertDocument(docPath, OutputExtensionType.odt);
             var linkodt = SaveFile(odtResult, "libredoc.odt");
             Console.WriteLine("Show odtResult: {0}", linkodt);
 
             Console.WriteLine();
             Console.WriteLine("xls 轉為 ods：");
-            var odsResult = LibreOffice.OfficeConverter.ConvertDocument(xlsPath, OutputExtensionType.ods);
+            var odsResult = Creatidea.Library.Office.LibreOffice.OfficeConverter.ConvertDocument(xlsPath, OutputExtensionType.ods);
             var linkods = SaveFile(odsResult, "librexls.ods");
             Console.WriteLine("Show odsResult: {0}", linkods);
 
             Console.WriteLine();
             Console.WriteLine("ppt 轉為 odp：");
-            var odpResult = LibreOffice.OfficeConverter.ConvertDocument(pptPath, OutputExtensionType.odp);
+            var odpResult = Creatidea.Library.Office.LibreOffice.OfficeConverter.ConvertDocument(pptPath, OutputExtensionType.odp);
             var linkodp = SaveFile(odpResult, "libreppt.odp");
             Console.WriteLine("Show odpResult: {0}", linkodp);
 
             Console.WriteLine();
             Console.WriteLine("docx 轉為 odt：");
-            var docxResult = LibreOffice.OfficeConverter.ConvertDocument(docxPath, OutputExtensionType.odt);
+            var docxResult = Creatidea.Library.Office.LibreOffice.OfficeConverter.ConvertDocument(docxPath, OutputExtensionType.odt);
             var linkdocx = SaveFile(docxResult, "libredocx.odt");
             Console.WriteLine("Show odtResult: {0}", linkdocx);
 
             Console.WriteLine();
             Console.WriteLine("xlsx 轉為 ods：");
-            var xlsxResult = LibreOffice.OfficeConverter.ConvertDocument(xlsxPath, OutputExtensionType.ods);
+            var xlsxResult = Creatidea.Library.Office.LibreOffice.OfficeConverter.ConvertDocument(xlsxPath, OutputExtensionType.ods);
             var linkxlsx = SaveFile(xlsxResult, "librexlsx.ods");
             Console.WriteLine("Show xlsResult: {0}", linkxlsx);
 
             Console.WriteLine();
             Console.WriteLine("pptx 轉為 pdf：");
-            var pptxResult = LibreOffice.OfficeConverter.ConvertDocument(pptxPath, OutputExtensionType.odp);
+            var pptxResult = Creatidea.Library.Office.LibreOffice.OfficeConverter.ConvertDocument(pptxPath, OutputExtensionType.odp);
             var linkpptx = SaveFile(pptxResult, "librepptx.odp");
             Console.WriteLine("Show pptxResult: {0}", linkpptx);
         }
@@ -359,37 +353,37 @@ namespace Creatidea.Library.Office.Example
 
             Console.WriteLine();
             Console.WriteLine("doc 轉為 pdf：");
-            var docResult = LibreOffice.OfficeConverter.ConvertDocument(docPath, OutputExtensionType.pdf);
+            var docResult = Creatidea.Library.Office.LibreOffice.OfficeConverter.ConvertDocument(docPath, OutputExtensionType.pdf);
             var linkdoc = SaveFile(docResult, "libredoc.pdf");
             Console.WriteLine("Show docResult: {0}", linkdoc);
 
             Console.WriteLine();
             Console.WriteLine("docx 轉為 pdf：");
-            var docxResult = LibreOffice.OfficeConverter.ConvertDocument(docxPath, OutputExtensionType.pdf);
+            var docxResult = Creatidea.Library.Office.LibreOffice.OfficeConverter.ConvertDocument(docxPath, OutputExtensionType.pdf);
             var linkdocx = SaveFile(docxResult, "libredocx.pdf");
             Console.WriteLine("Show docxResult: {0}", linkdocx);
 
             Console.WriteLine();
             Console.WriteLine("xls 轉為 pdf：");
-            var xlsResult = LibreOffice.OfficeConverter.ConvertDocument(xlsPath, OutputExtensionType.pdf);
+            var xlsResult = Creatidea.Library.Office.LibreOffice.OfficeConverter.ConvertDocument(xlsPath, OutputExtensionType.pdf);
             var linkxls = SaveFile(xlsResult, "librexls.pdf");
             Console.WriteLine("Show xlsResult: {0}", linkxls);
 
             Console.WriteLine();
             Console.WriteLine("xls 轉為 pdf：");
-            var xlsxResult = LibreOffice.OfficeConverter.ConvertDocument(xlsxPath, OutputExtensionType.pdf);
+            var xlsxResult = Creatidea.Library.Office.LibreOffice.OfficeConverter.ConvertDocument(xlsxPath, OutputExtensionType.pdf);
             var linkxlsx = SaveFile(xlsxResult, "librexlsx.pdf");
             Console.WriteLine("Show xlsResult: {0}", linkxlsx);
 
             Console.WriteLine();
             Console.WriteLine("ppt 轉為 pdf：");
-            var pptResult = LibreOffice.OfficeConverter.ConvertDocument(pptPath, OutputExtensionType.pdf);
+            var pptResult = Creatidea.Library.Office.LibreOffice.OfficeConverter.ConvertDocument(pptPath, OutputExtensionType.pdf);
             var linkppt = SaveFile(pptResult, "libreppt.pdf");
             Console.WriteLine("Show pptResult: {0}", linkppt);
 
             Console.WriteLine();
             Console.WriteLine("pptx 轉為 pdf：");
-            var pptxResult = LibreOffice.OfficeConverter.ConvertDocument(pptxPath, OutputExtensionType.pdf);
+            var pptxResult = Creatidea.Library.Office.LibreOffice.OfficeConverter.ConvertDocument(pptxPath, OutputExtensionType.pdf);
             var linkpptx = SaveFile(pptxResult, "librepptx.pdf");
             Console.WriteLine("Show pptxResult: {0}", linkpptx);
         }

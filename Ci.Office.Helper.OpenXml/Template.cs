@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Creatidea.Library.Office.OpenXml
+﻿namespace Ci.Office.Helper.OpenXml
 {
+    using System;
+    using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
 
-    using Creatidea.Library.Office.OpenXml.Manager;
-    using Creatidea.Library.Office.OpenXml.Models;
+    using Ci.Office.Helper.OpenXml.Manager;
+    using Ci.Office.Helper.OpenXml.Models;
 
     using DocumentFormat.OpenXml.Wordprocessing;
 

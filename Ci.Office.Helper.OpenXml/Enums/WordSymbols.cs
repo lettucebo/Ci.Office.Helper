@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Creatidea.Library.Office.OpenXml.Enums
+﻿namespace Ci.Office.Helper.OpenXml.Enums
 {
     using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
 
     public enum WordSymbols
     {

@@ -1,13 +1,12 @@
-﻿namespace Creatidea.Library.Office.OpenXml.Manager
+﻿namespace Ci.Office.Helper.OpenXml.Manager
 {
     using System.Collections.Generic;
     using System.Drawing;
     using System.IO;
     using System.Linq;
-
-    using Creatidea.Library.Office.OpenXml.Models;
-
     using System.Reflection;
+
+    using Ci.Office.Helper.OpenXml.Models;
 
     using DocumentFormat.OpenXml;
     using DocumentFormat.OpenXml.Drawing.Wordprocessing;
@@ -289,7 +288,7 @@
                 // can not find image, use default
                 // read embedded resource
                 assembly = Assembly.GetExecutingAssembly();
-                imageStream = assembly.GetManifestResourceStream("Creatidea.Library.Office.OpenXml.Resources.Default.png");
+                imageStream = assembly.GetManifestResourceStream("Ci.Office.Helper.OpenXml.Resources.Default.png");
 
                 MemoryStream ms = new MemoryStream();
                 imageStream.CopyTo(ms);

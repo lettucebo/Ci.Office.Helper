@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Creatidea.Library.Office.LibreOffice", "Creatidea.Library.Office.LibreOffice\Creatidea.Library.Office.LibreOffice.csproj", "{A9906155-588E-49C8-9411-CA41FA3CC738}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ci.Office.Helper.LibreOffice", "Ci.Office.Helper.LibreOffice\Ci.Office.Helper.LibreOffice.csproj", "{A9906155-588E-49C8-9411-CA41FA3CC738}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Creatidea.Library.Office.MsOffice", "Creatidea.Library.Office.MicrosoftOffice\Creatidea.Library.Office.MsOffice.csproj", "{7DA5F16E-FC8A-4C56-B25F-3DECFCD34F1D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ci.Office.Helper.MsOffice", "Ci.Office.Helper.MsOffice\Ci.Office.Helper.MsOffice.csproj", "{7DA5F16E-FC8A-4C56-B25F-3DECFCD34F1D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installtion", "Installtion", "{5FD60ED6-173E-4C1E-BE41-B343ABBFF90B}"
 EndProject
@@ -15,9 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LiberOffice", "LiberOffice"
 		Installtion\LiberOffice\LibreOffice_5.1.0_Win_x86_sdk.txt = Installtion\LiberOffice\LibreOffice_5.1.0_Win_x86_sdk.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Creatidea.Library.Office.Example", "Creatidea.Library.Office.Example\Creatidea.Library.Office.Example.csproj", "{64FDE0A3-11D8-42C4-8949-F0440E1E97CC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ci.Office.Helper.Example", "Ci.Office.Helper.Example\Ci.Office.Helper.Example.csproj", "{64FDE0A3-11D8-42C4-8949-F0440E1E97CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Creatidea.Library.Office.OpenXml", "Creatidea.Library.Office.OpenXml\Creatidea.Library.Office.OpenXml.csproj", "{4A0ED890-D08C-4EED-BB79-9FB3227C6951}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ci.Office.Helper.OpenXml", "Ci.Office.Helper.OpenXml\Ci.Office.Helper.OpenXml.csproj", "{4A0ED890-D08C-4EED-BB79-9FB3227C6951}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReadMe", "ReadMe", "{8E2215A4-DCB2-44EF-8264-32CCAB96F72F}"
 	ProjectSection(SolutionItems) = preProject
