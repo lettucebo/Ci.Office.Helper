@@ -32,6 +32,7 @@ using Ci.Office.Helper.OpenXml;
 ## 開始開發
 
 #### 1. 建立樣板 Word 檔案
+
 先建立 Word 樣板，作為之後套版之標準
 
 使用 Word 之**內容控制項**建立動態欄位
@@ -40,7 +41,8 @@ using Ci.Office.Helper.OpenXml;
 
 範例：[WordTemplate.docx](https://github.com/lettucebo/Ci.Office.Helper/blob/master/Ci.Office.Helper.Example/Demo/Word/Template.docx)
 
-備註1. 圖片的內容控制項需先內置圖片，否則會發生未知原因的找不到控制項問題
+備註：圖片的內容控制項需先內置圖片，否則會發生未知原因的找不到控制項問題
+<hr/>
 
 #### 2. 建立套版參數列表
 
@@ -57,6 +59,7 @@ var tableDict = new Dictionary<string, DocumentFormat.OpenXml.Wordprocessing.Tab
 ```
 
 詳細範例可參考：Ci.Office.Helper.Example/[Program.cs](https://github.com/lettucebo/Ci.Office.Helper/blob/master/Ci.Office.Helper.Example/Program.cs#L80-L213)
+<hr/>
 
 #### 3. 呼叫 Template.DocxMaker 進行處理
 
@@ -68,6 +71,7 @@ var template = new Template();
 // call DocxMaker to template the file
 var filePath = template.DocxMaker(docxTemplatePath, textDict, imageDict, tableDict);
 ```
+<hr/>
 
 ## 備註
 - 應用程式要擁有暫存目錄寫入權限，否則無法產生暫存檔進行套版
