@@ -9,6 +9,8 @@ namespace Creatidea.Library.Office.OpenXml
     using Creatidea.Library.Office.OpenXml.Manager;
     using Creatidea.Library.Office.OpenXml.Models;
 
+    using DocumentFormat.OpenXml.Wordprocessing;
+
     public class Template
     {
         /// <summary>
@@ -23,7 +25,7 @@ namespace Creatidea.Library.Office.OpenXml
             string templateFilePath,
             Dictionary<string, OpenXmlTextInfo> textDict = null,
             Dictionary<string, MemoryStream> imageDict = null,
-            Dictionary<string, DocumentFormat.OpenXml.Wordprocessing.Table> tableDict = null)
+            Dictionary<string, Table> tableDict = null)
         {
             string templateDocx = templateFilePath;
             string tempDocx = Path.GetTempPath() + Guid.NewGuid() + ".docx";

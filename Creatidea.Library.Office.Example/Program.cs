@@ -16,7 +16,12 @@ namespace Creatidea.Library.Office.Example
     using Creatidea.Library.Office.OpenXml.Manager;
     using Creatidea.Library.Office.OpenXml.Models;
 
+    using DocumentFormat.OpenXml;
+    using DocumentFormat.OpenXml.Wordprocessing;
+
     using Microsoft.Office.Interop.Excel;
+
+    using TableStyle = DocumentFormat.OpenXml.Wordprocessing.TableStyle;
 
     /// <summary>
     /// 範例程式
@@ -75,6 +80,9 @@ namespace Creatidea.Library.Office.Example
             Console.WriteLine();
             Console.WriteLine("template to docx：");
 
+            // generate random data
+            Random rand = new Random(Guid.NewGuid().GetHashCode());
+
             #region parameter dictionary
 
             var textDict = new Dictionary<string, OpenXmlTextInfo>
@@ -114,13 +122,15 @@ namespace Creatidea.Library.Office.Example
                {"SDT27",new OpenXmlTextInfo(){Text = "abc12207@gmail.com", IsInnerXml = false}}
             };
 
+            // demo image parameter
             var imageDict = new Dictionary<string, MemoryStream>();
 
             imageDict.Add("SDTI01", WordManager.GetStreamFromImagePath(Path.Combine(Directory.GetCurrentDirectory(), "Demo\\Image", "Creatidea.png")));
+
+            // demo if image not exist, will auto load default image
             imageDict.Add("SDTI02", WordManager.GetStreamFromImagePath("C:/NotExistImage.jpg"));
 
             // start demo: use dynamic parameter, if random%2 == 0 ,then set to checked
-            Random rand = new Random(Guid.NewGuid().GetHashCode());
             if (rand.Next(1, 3) % 2 == 0)
             {
                 textDict["SDT07"] = new OpenXmlTextInfo()
@@ -146,10 +156,70 @@ namespace Creatidea.Library.Office.Example
             }
             // end demo: use dynamic parameter
 
+            // start: demo dynamic table
+            Table table = new Table();
+
+            TableProperties props = new TableProperties(
+                new TableBorders(
+                new TopBorder
+                {
+                    Val = new EnumValue<BorderValues>(BorderValues.Single),
+                    Size = 12
+                },
+                new BottomBorder
+                {
+                    Val = new EnumValue<BorderValues>(BorderValues.Single),
+                    Size = 12
+                },
+                new LeftBorder
+                {
+                    Val = new EnumValue<BorderValues>(BorderValues.Single),
+                    Size = 12
+                },
+                new RightBorder
+                {
+                    Val = new EnumValue<BorderValues>(BorderValues.Single),
+                    Size = 12
+                },
+                new InsideHorizontalBorder
+                {
+                    Val = new EnumValue<BorderValues>(BorderValues.Single),
+                    Size = 12
+                },
+                new InsideVerticalBorder
+                {
+                    Val = new EnumValue<BorderValues>(BorderValues.Single),
+                    Size = 12
+                }));
+
+            table.AppendChild<TableProperties>(props);
+
+            for (var i = 0; i <= rand.Next(1, 10); i++)
+            {
+                var tr = new TableRow();
+                for (var j = 0; j <= rand.Next(1, 5); j++)
+                {
+                    var tc = new TableCell();
+                    tc.Append(new Paragraph(new Run(new Text(rand.Next().ToString()))));
+
+                    // Assume you want columns that are automatically sized.
+                    tc.Append(new TableCellProperties(
+                        new TableCellWidth { Type = TableWidthUnitValues.Auto }));
+
+                    tr.Append(tc);
+                }
+                table.Append(tr);
+            }
+
+            var tableDict = new Dictionary<string, Table>();
+            tableDict.Add("SDTT01", table);
+
+            // end: demo dynamic table
+
             #endregion
 
             var template = new Template();
-            var filePath = template.DocxMaker(docxTemplatePath, textDict, imageDict);
+            var filePath = template.DocxMaker(docxTemplatePath, textDict, imageDict, tableDict);
             var linkdocx = SaveFile(filePath, "templatedocx.docx");
             Console.WriteLine("Show docResult: {0}", linkdocx);
             Console.WriteLine(Enum.GetName(typeof(WordSymbols), WordSymbols.UnChecked));

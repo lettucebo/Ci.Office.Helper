@@ -20,8 +20,8 @@
 
     public class WordManager
     {
-        static Assembly _assembly;
-        static Stream _imageStream;
+        private static Assembly assembly;
+        private static Stream imageStream;
 
         /// <summary>
         /// Contains the word processing document
@@ -118,7 +118,7 @@
         /// <summary>
         /// 動態產生表格
         /// </summary>
-        public void UpdateTable(Dictionary<string, DocumentFormat.OpenXml.Wordprocessing.Table> tagValueDict)
+        public void UpdateTable(Dictionary<string, Table> tagValueDict)
         {
             Document dc = mainDocPart.Document;
 
@@ -288,11 +288,11 @@
             {
                 // can not find image, use default
                 // read embedded resource
-                _assembly = Assembly.GetExecutingAssembly();
-                _imageStream = _assembly.GetManifestResourceStream("Creatidea.Library.Office.OpenXml.Resources.Default.png");
+                assembly = Assembly.GetExecutingAssembly();
+                imageStream = assembly.GetManifestResourceStream("Creatidea.Library.Office.OpenXml.Resources.Default.png");
 
                 MemoryStream ms = new MemoryStream();
-                _imageStream.CopyTo(ms);
+                imageStream.CopyTo(ms);
                 return ms;
             }
             else
