@@ -9,8 +9,9 @@
 
 ## 使用前注意事項
 
-- 此套件使用 [Open XML SDK 2.5](https://www.microsoft.com/en-us/download/details.aspx?id=30425) 作為套版工具，因此若伺服器**無法安裝 Open XML SDK 2.5 就可以跳過此套件**了
-- 因 Word 2007 版本以後才使用 XML 作為儲存格式(.docx)，儲存的檔案一定為 *.docx
+- 此套件使用 [Open XML SDK 2.5](https://www.microsoft.com/en-us/download/details.aspx?id=30425) 作為套版工具
+  - 原則上應須安裝在伺服器上，但因現在已可直接從 Nuget 取得套件，因此可不必安裝 SDK
+- 因 Word 2007 版本以後才使用 XML 作為儲存格式(.docx)，開啟、編輯與儲存的檔案一定為 *.docx
 
 ## 安裝 nuget 套件
 
@@ -59,8 +60,7 @@ var tableDict = new Dictionary<string, DocumentFormat.OpenXml.Wordprocessing.Tab
 
 #### 3. 呼叫 Template.DocxMaker 進行處理
 
-直接呼叫 **LibreOffice.OfficeConverter.PptToPdf(filePath)** 傳入 PowerPoint 檔案完整路徑即可
-可傳入`*.doc` 或 `*.docx`
+先初始化 Template 類別，然後呼叫 DocxMaker 方法進行套版動作
 ```csharp
 // create template engine
 var template = new Template();
@@ -71,5 +71,3 @@ var filePath = template.DocxMaker(docxTemplatePath, textDict, imageDict, tableDi
 
 ## 備註
 - 應用程式要擁有暫存目錄寫入權限，否則無法產生暫存檔進行套版
-
-## 相關問題處理步驟
