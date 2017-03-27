@@ -113,8 +113,8 @@ Console.WriteLine("Show pptxResult: {0}", linkpptx);
 
 ## 備註
 
-1. 佈署在 IIS 上需注意 LibreOffice 安路路徑權限
-2. 有些 LibreOffice 沒有的功能轉換過去會無法使用(畫布)
+1. 佈署在 IIS 上需注意 LibreOffice 安裝路徑權限
+2. 有些 OpenOffice 沒有的功能轉換過去會無法使用(畫布)
 3. 確定 IIS 有執行過該程式
 
 ## 參考資料
