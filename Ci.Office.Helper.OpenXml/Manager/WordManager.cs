@@ -71,7 +71,7 @@ namespace Ci.Office.Helper.OpenXml.Manager
 
                 foreach (var sdtElement in mainDocPart.Document.Body.Descendants<SdtElement>())
                 {
-                    if (sdtElement.SdtProperties.GetFirstChild<Tag>().Val == tagId)
+                    if (sdtElement.SdtProperties.GetFirstChild<Tag>()?.Val == tagId)
                     {
                         OpenXmlElement parantElement = sdtElement.Descendants<Paragraph>().SingleOrDefault();
                         if (parantElement == null)
