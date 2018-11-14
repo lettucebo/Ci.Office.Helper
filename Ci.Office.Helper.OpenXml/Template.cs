@@ -16,9 +16,9 @@
         /// 將字典檔丟附openxmlmanager
         /// </summary>
         /// <param name="templateFilePath">template file path</param>
-        /// <param name="textDict">text value pair dicitionary</param>
-        /// <param name="imageDict">image value pair dicitionary</param>
-        /// <param name="tableDict">table value pair dicitionary</param>
+        /// <param name="textDict">text value pair dictionary</param>
+        /// <param name="imageDict">image value pair dictionary</param>
+        /// <param name="tableDict">table value pair dictionary</param>
         /// <returns>complete template docx file path</returns>
         public string DocxMaker(
             string templateFilePath,

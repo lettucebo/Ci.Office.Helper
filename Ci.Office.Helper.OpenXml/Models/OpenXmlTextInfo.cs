@@ -1,4 +1,6 @@
-﻿namespace Ci.Office.Helper.OpenXml.Models
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+
+namespace Ci.Office.Helper.OpenXml.Models
 {
     public class OpenXmlTextInfo
     {
@@ -10,6 +12,8 @@
         public bool IsInnerXml;
 
         public string Separator;
+
+        public RunFonts RunFonts;
 
     }
 }

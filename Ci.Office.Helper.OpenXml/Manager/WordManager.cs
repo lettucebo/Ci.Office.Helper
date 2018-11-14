@@ -1,4 +1,7 @@
-﻿namespace Ci.Office.Helper.OpenXml.Manager
+﻿using System;
+using Ci.Extension;
+
+namespace Ci.Office.Helper.OpenXml.Manager
 {
     using System.Collections.Generic;
     using System.Drawing;
@@ -64,6 +67,7 @@
                 var tagId = pair.Key;
                 var text = pair.Value.Text;
                 var isInnerXml = pair.Value.IsInnerXml;
+                var customRunFont = pair.Value.RunFonts;
 
                 foreach (var sdtElement in mainDocPart.Document.Body.Descendants<SdtElement>())
                 {
@@ -92,15 +96,45 @@
                                     else
                                     {
                                         RunProperties runProperties = new RunProperties();
-                                        RunFonts runFont = new RunFonts();
-                                        runFont.Ascii = "Times New Roman";
-                                        runFont.EastAsia = "標楷體";
+
+                                        // 判斷是否有自訂字元，不可以共用同一個 RunFonts 實體
+                                        var runFont = new RunFonts();
+                                        if (customRunFont == null)
+                                        {
+                                            runFont.Ascii = "Times New Roman";
+                                            runFont.EastAsia = "標楷體";
+                                        }
+                                        else
+                                        {
+                                            runFont.Ascii = customRunFont.Ascii;
+                                            runFont.EastAsia = customRunFont.EastAsia;
+                                        }
+
                                         runProperties.Color = new DocumentFormat.OpenXml.Wordprocessing.Color()
                                         {
                                             Val = "000000"
                                         };
                                         runProperties.Append(runFont);
-                                        runProperties.Append(new Text(text));
+
+                                        // 判斷是否有換行字元，轉換成 break
+                                        string[] stringSeparators = new string[] { "\r\n", "\n" };
+                                        var textArr = text.Split(stringSeparators, StringSplitOptions.None).ToList();
+                                        if (textArr.Last().IsNullOrWhiteSpace() && textArr.Count > 1)
+                                        {
+                                            // 判斷是否多行時，最後一行因 split 而多餘空白，將其移除
+                                            textArr.RemoveAt(textArr.Count - 1);
+                                        }
+
+                                        foreach (string textValue in textArr)
+                                        {
+                                            runProperties.Append(new Text(textValue));
+                                            if (textValue != textArr.Last())
+                                            {
+                                                runProperties.Append(new Break());
+
+                                            }
+                                        }
+
                                         r.AppendChild(runProperties);
                                         r.RemoveChild(t);
                                     }
@@ -263,6 +297,12 @@
                     string relId = GetImageRelId(sdtElement, tagId);
                     if (!string.IsNullOrEmpty(relId))
                     {
+                        if (imageStream == null)
+                        {
+                            sdtElement.Remove();
+                            continue;
+                        }
+
                         // Get size of image
                         int imageWidth;
                         int imageHeight;
