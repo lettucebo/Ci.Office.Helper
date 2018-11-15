@@ -23,7 +23,7 @@ namespace Ci.Office.Helper.OpenXml.Manager
     public class WordManager
     {
         private static Assembly assembly;
-        private static Stream imageStream;
+        private static Stream defaultImageStream;
 
         /// <summary>
         /// Contains the word processing document
@@ -290,14 +290,14 @@ namespace Ci.Office.Helper.OpenXml.Manager
             foreach (var pair in tagValueDict)
             {
                 var tagId = pair.Key;
-                var imageStream = pair.Value;
+                var imgStream = pair.Value;
 
                 foreach (SdtElement sdtElement in mainDocPart.Document.Body.Descendants<SdtElement>())
                 {
                     string relId = GetImageRelId(sdtElement, tagId);
                     if (!string.IsNullOrEmpty(relId))
                     {
-                        if (imageStream == null)
+                        if (imgStream == null)
                         {
                             sdtElement.Remove();
                             continue;
@@ -308,7 +308,7 @@ namespace Ci.Office.Helper.OpenXml.Manager
                         int imageHeight;
                         GetPlaceholderImageSize(mainDocPart.Document.Body.Descendants<Drawing>(), relId, out imageWidth, out imageHeight);
 
-                        UpdateImagePart(relId, imageStream, imageWidth, imageHeight);
+                        UpdateImagePart(relId, imgStream, imageWidth, imageHeight);
 
                         break;
                     }
@@ -328,10 +328,10 @@ namespace Ci.Office.Helper.OpenXml.Manager
                 // can not find image, use default
                 // read embedded resource
                 assembly = Assembly.GetExecutingAssembly();
-                imageStream = assembly.GetManifestResourceStream("Ci.Office.Helper.OpenXml.Resources.Default.png");
+                defaultImageStream = assembly.GetManifestResourceStream("Ci.Office.Helper.OpenXml.Resources.Default.png");
 
                 MemoryStream ms = new MemoryStream();
-                imageStream.CopyTo(ms);
+                defaultImageStream.CopyTo(ms);
                 return ms;
             }
             else
