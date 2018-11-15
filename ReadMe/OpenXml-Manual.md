@@ -41,7 +41,7 @@ using Ci.Office.Helper.OpenXml;
 
 範例：[WordTemplate.docx](https://github.com/lettucebo/Ci.Office.Helper/blob/master/Ci.Office.Helper.Example/Demo/Word/Template.docx)
 
-備註：圖片的內容控制項需先內置圖片，否則會發生未知原因的找不到控制項問題
+備註：圖片的內容控制項需先內置圖片，且每個 Content Control 內置之圖片需不同，否則會發生未知原因的找不到控制項問題。
 <hr/>
 
 #### 2. 建立套版參數列表
