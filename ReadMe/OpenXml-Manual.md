@@ -75,3 +75,5 @@ var filePath = template.DocxMaker(docxTemplatePath, textDict, imageDict, tableDi
 
 ## 備註
 - 應用程式要擁有暫存目錄寫入權限，否則無法產生暫存檔進行套版
+- 目前 Image 部分無法動態新增，但是可以刪除
+  - Image 給與 null 將會觸發將其 Content Control 刪除
